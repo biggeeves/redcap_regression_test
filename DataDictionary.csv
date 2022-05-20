@@ -1,0 +1,1555 @@
+﻿"Variable / Field Name","Form Name","Section Header","Field Type","Field Label","Choices, Calculations, OR Slider Labels","Field Note","Text Validation Type OR Show Slider Number","Text Validation Min","Text Validation Max",Identifier?,"Branching Logic (Show field only if...)","Required Field?","Custom Alignment","Question Number (surveys only)","Matrix Group Name","Matrix Ranking?","Field Annotation"
+instance_name,instance_info,,text,"REDCap instance name",,,,,,,,,,,,,
+instance_directions,instance_info,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Record the REDCap base URL, REDCap version and the PID of the REDCap project are testing.. </p>
+<em>Note: If testing another REDCap instance, ie another URL, the prefilled URL, version and PID may be incorrect. They are values for this project's instance.</em>",,,,,,,,,,,,,
+instance_url,instance_info,,text,"REDCap instance URL
+<em>The default value is this REDCap's base URL.  If another REDCap URL is being used, remove the default value and enter in the correct value.</em>",,,,,,,,y,,,,," @DEFAULT=""[redcap-base-url]"""
+instance_redcap_version,instance_info,,text,"REDCap Version
+<em>The default value is this REDCap's version.  If another REDCap version is being used, remove the default value and enter in the correct value.</em>",,,,,,,,y,,,,," @DEFAULT=""[redcap-version]"""
+instance_version_url,instance_info,,text,"REDCap versioned URL",,,,,,,,y,,,,," @DEFAULT=""[redcap-version-url]"""
+instance_pid,instance_info,,text,"The PID of the project in [instance_url]
+The PID of this local project is [project-id]",,,number,1,999999999,,,y,,,,,
+instance_pid_different,instance_info,,descriptive,"<p style=""text-align:center; color: #ff6700"">This project's PID is [project-id] and PID entered above is [instance_pid].  They are different.</p>",,,,,,,"[instance_pid] <> """" and [project-id] <> [instance_pid]",,,,,,
+instance_verify,instance_info,,radio,"After saving click <a href=""[instance_version_url]index.php?pid=[instance_pid]"" target=""_blank"">here</a> to verify that the link to the project goes to the correct instance, URL, and project ID.  <em>(hrefs can not be updated in real-time).</em>
+
+The Project URL is: [instance_version_url]index.php?pid=[instance_pid]","1, Correct | 0, Incorrect, please fix.",,,,,,,,,,,,
+instance_check_format,instance_info,,descriptive,"<p style=""color:red;"">The REDCap version URL must equal [set_up_arm_1][instance_url]redcap_v[set_up_arm_1][instance_redcap_version]/</p>",,,,,,,"[set_up_arm_1][instance_version_url] != concat([set_up_arm_1][instance_url],'redcap_v',[set_up_arm_1][instance_redcap_version], '/')",,,,,,
+instance_check_last_char,instance_info,,descriptive,"<p style=""color:red;"">The REDCap version URL must end in a ""/""</p>",,,,,,,"ends_with([set_up_arm_1][instance_version_url],'/') = 0",,,,,,
+local_equals_remote,instance_info,,calc,"This equals 1 if the REDCap version and url match this REDCap's url and version.  If they do not match this equals 0.  They may not match if the tests an different version of REDCap is used.  For example: The REDCap of interest is at  ""example.org"" and the test results are record here, not there.","if([set_up_arm_1][instance_version_url] = [redcap-version-url] , 1, 0)",,,,,,,,,,,,
+url_tested_different,instance_info,,descriptive,"Note: The URL for REDCap is different than this REDCap's URL.
+URL: [set_up_arm_1][instance_version_url]
+URL: [redcap-version-url]",,,,,,,"[local_equals_remote] = '0'",,,,,,
+instance_note,instance_info,,notes,Notes,,,,,,,,,LV,,,,
+read_me,read_me,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Welcome to REDCap.  This project serves two proposes.  It was built for regression testing, but it can also serve as an introduction to REDCap's features.
+
+Regression testing is a set of tests that ensure that previously developed and tested software still performs after a change. If something was functional and is found no longer functional, that is a regression.  To perform a regression test simply follow the order of the instruments and the directions within each instrument.  One instrument will check one aspect of REDCap and may involve a single test or multiple tests.  When a test passes, mark the instrument as ""Complete"" (Green).  When a test fails mark it ""Incomplete"" (Red) if it is a critical failure.  Mark it as ""Unverified"" (Yellow) if it fails but is not mission critical.  When another test is needed, another time point must be added to the event grid and instruments assigned to that event.
+
+To use this as an introduction to REDCap follow the instruments in order, as if you are regression testing.  Mark the instrument as ""Complete"" (Green) when you are proficient.  Mark it ""Incomplete"" (Red) to revisit the topic.  Mark it ""Unverified"" (Yellow) if there are questions about the content, but no follow up is needed.
+
+All links open in a new tab.  When done with that tab, close it.
+</p>
+",,,,,,,,,,,,,
+read_me_setup_to_email,read_me,,descriptive,"<h4>If this project was just created via an XML upload</h4>
+The TO email field must be designated for ASIs to work!
+<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Go to <a href=""[set_up_arm_1][instance_version_url]ProjectSetup/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Project Set Up Page</a> and select the to_email as designated email address.  It should say <em>""Field currently designated: to_email  (""To email address"")""</em>
+</p>",,,,,,,,,,,,,
+contact_info_directions,contact_info_for_asis_alerts_etc,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions:  The email address below will be used for email testing ASI, Alerts and Notifications</p>",,,,,,,,,,,,,
+from_email,contact_info_for_asis_alerts_etc,,text,"From email address to use for ASI, Alert and Notifications, etc?",,,email,,,,,,,,,,
+from_name,contact_info_for_asis_alerts_etc,,text,"From Full Name",,,,,,,,,,,,,
+to_email,contact_info_for_asis_alerts_etc,,text,"To email address",,,email,,,,,,,,,,
+to_name,contact_info_for_asis_alerts_etc,,text,"To Full Name",,,,,,,,,,,,,
+receive_emails,contact_info_for_asis_alerts_etc,,radio,"Do you want to receive automatic emails?
+
+(This is currently not utilized anywhere.)","1, Yes | 0, No",,,,,,,,RH,,,,
+badse_config_directions,base_configuration_check_page,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">This is the BASE configuration check.  When REDCap is running perfectly, this is what the REDCap check configuration page displays.  <em>Record the output from the configuration check page here and update it when a configuration changes</em></p>",,,,,,,,,,,,,
+base_config_date,base_configuration_check_page,,text,"The day this base configuration was last updated",,,date_mdy,2020-01-01,2035-01-01,,,,RH,,,,
+base_config_pass_count,base_configuration_check_page,,calc,"Total Passing","sum( 
+if([base_config_file_structure] = ""1"",1,0),
+if([base_config_table_redcap_config] = ""1"",1,0),
+if([base_config_db_structure] = ""1"",1,0),
+if([base_config_curl] = ""1"",1,0),
+if([base_config_consortium_server] = ""1"",1,0),
+if([base_config_cron] = ""1"",1,0),
+if([base_config_ssl] = ""1"",1,0),
+if([base_config_php_version] = ""1"",1,0),
+if([base_config_mysql_version] = ""1"",1,0),
+if([base_config_gd_library] = ""1"",1,0),
+if([base_config_php_fileinfo] = ""1"",1,0),
+if([base_config_send_emails] = ""1"",1,0),
+if([base_config_max_input_vars] = ""1"",1,0),
+if([base_config_hook_functions] = ""1"",1,0),
+if([base_config_mysql_performance] = ""1"",1,0),
+if([base_config_web_temp_writable] = ""1"",1,0),
+if([base_config_temp_dir] = ""1"",1,0),
+if([base_config_file_uploads] = ""1"",1,0),
+if([base_config_modules_writable] = ""1"",1,0),
+if([base_config_twilio] = ""1"",1,0),
+if([base_config_promis] = ""1"",1,0),
+if([base_config_bioportal] = ""1"",1,0),
+if([base_config_url_short] = ""1"",1,0),
+if([base_config_recaptcha] = ""1"",1,0),
+if([base_config_field_bank] = ""1"",1,0),
+if([base_config_cookie] = ""1"",1,0)
+ )",,,,,,,,RH,,,,
+base_config_file_structure,base_configuration_check_page,,radio,"TEST 1: Establish basic REDCap file structure","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_file_structure_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_file_structure]  <> 1",,LV,,,,
+base_config_table_redcap_config,base_configuration_check_page,,radio,"TEST 2: Connect to the table named ""redcap_config""","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_table_redcap_config_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_table_redcap_config]  <> 1",,LV,,,,
+base_config_db_structure,base_configuration_check_page,,radio,"TEST 3: Check REDCap database table structure","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_db_structure_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_db_structure]  <> 1",,LV,,,,
+base_config_curl,base_configuration_check_page,,radio,"TEST 4: Check if PHP cURL extension is installed","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_curl_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_curl]  <> 1",,LV,,,,
+base_config_consortium_server,base_configuration_check_page,,radio,"TEST 5:  Checking communication with REDCap Consortium server","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_consortium_server_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_consortium_server]  <> 1",,LV,,,,
+base_config_cron,base_configuration_check_page,,radio,"TEST 6: Check if REDCap Cron Job is running","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_cron_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_cron]  <> 1",,LV,,,,
+base_config_ssl,base_configuration_check_page,"Secondary tests",radio,"Using SSL","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_ssl_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_ssl]  <> 1",,LV,,,,
+base_config_php_version,base_configuration_check_page,,radio,"Using PHP 7.2.5 or higher","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_php_version_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_php_version]  <> 1",,LV,,,,
+base_config_mysql_version,base_configuration_check_page,,radio,"Using MySQL 5.5.5 or higher","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_mysql_version_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_mysql_version]  <> 1",,LV,,,,
+base_config_gd_library,base_configuration_check_page,,radio,"GD library (version 2 or higher) is installed","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_gd_library_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_gd_library]  <> 1",,LV,,,,
+base_config_php_fileinfo,base_configuration_check_page,,radio,"PHP Fileinfo extension is installed","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_php_fileinfo_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_php_fileinfo] <> 1",,LV,,,,
+base_config_send_emails,base_configuration_check_page,,radio,"REDCap is able to send emails","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_send_emails_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_send_emails]  <> 1",,LV,,,,
+base_config_max_input_vars,base_configuration_check_page,,radio,max_input_vars,"1, Pass | 0, Fail | 2, Recommendation",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_max_input_vars_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_max_input_vars]  <> 1",,LV,,,,
+base_config_hook_functions,base_configuration_check_page,,radio,"Hook Functions","1, Pass | 0, Fail | 2, Recommendation",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_hook_function_notes,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_hook_functions]  <> 1 and [base_config_hook_functions]  <> """"",,LV,,,,
+base_config_mysql_performance,base_configuration_check_page,,radio,"MySQL configuration settings appear sufficient for optimal performance and stability","1, Pass | 0, Fail | 2, Recommendation",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_mysql_performance_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_mysql_performance] <> 1",,LV,,,,
+base_config_web_temp_writable,base_configuration_check_page,,radio,"The REDCap web server's temp directory is writable","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_web_temp_writable_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_web_temp_writable]  <> 1",,LV,,,,
+base_config_temp_dir,base_configuration_check_page,,radio," ""temp"" directory is writable","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_temp_dir_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_temp_dir]  <> 1",,LV,,,,
+base_config_file_uploads,base_configuration_check_page,,radio,"File upload directory is writable","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_file_uploads_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_file_uploads]  <> 1",,LV,,,,
+base_config_modules_writable,base_configuration_check_page,,radio,"""modules"" directory is writable","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_modules_writable_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_modules_writable]  <> 1",,LV,,,,
+base_config_db_user,base_configuration_check_page,,radio,"MySQL database user privileges should be modified - RECOMMENDED: It is recommended that you modify the database privileges of your MySQL user ""redcap"". This user has CREATE and ALTER table privileges, but does NOT have DROP table privileges. This user must have all four privileges (CREATE, ALTER, DROP, REFERENCES) or else none of those four. ","1, Pass | 0, Fail | -1, Not applicable",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_db_user_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_db_user] <> 1 and [base_config_db_user] <> """"",,RH,,,,
+base_config_twilio,base_configuration_check_page,,radio,"Checking communication with Twilio telephony API services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_twilio_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_twilio]  <> 1",,LV,,,,
+base_config_promis,base_configuration_check_page,,radio,"Checking communication with PROMIS assessment API services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_promis_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_promis]  <> 1",,LV,,,,
+base_config_bioportal,base_configuration_check_page,,radio,"Checking communication with BioPortal biomedical ontology API services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_bioportal_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_bioportal]  <> 1",,LV,,,,
+base_config_url_short,base_configuration_check_page,,radio,"Checking communication with REDCAP.LINK URL shortening API services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_url_short_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_url_short]  <> 1",,LV,,,,
+base_config_recaptcha,base_configuration_check_page,,radio,"Google reCAPTCHA API services","1, Pass | 0, Fail | 2, Recommendation | -1, Disabled",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_recaptcha_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_recaptcha] <> '1' and [base_config_recaptcha] <> ''",,LH,,,,
+base_config_field_bank,base_configuration_check_page,,radio,"Checking communication with Field Bank NLM services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_field_bank_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_field_bank]  <> 1",,LV,,,,
+base_config_cookie,base_configuration_check_page,,radio," Security improvement: For better security, it is recommended that you enable the session.cookie_secure option in your web server's PHP . INI file. ","1, Pass | 0, Fail | 2, Recommendation",,,,,,,,RH,,,," @DEFAULT=""1"""
+base_config_cookie_msg,base_configuration_check_page,,notes,Description,,,,,,,"[base_config_cookie]  <> 1 and [base_config_cookie]  <> """"",,LV,,,,
+base_config_notes,base_configuration_check_page,,notes,"Final Notes",,,,,,,,,LH,,,,
+base_em_directions,base_external_modules,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Capture basic information about installed External Modules
+
+<em>Reference:<a href=""[set_up_arm_1][instance_version_url]ExternalModules/manager/control_center.php"" target=""_blank"" style=""color:#FFF;"">External Module Control Center</a></em>
+</p>",,,,,,,,,,,,,
+base_em_name,base_external_modules,,text,"External Module Name",,,,,,,,y,,,,,
+base_em_version,base_external_modules,,text,"Current Version",,,,,,,,y,RH,,,,
+base_em_install_date,base_external_modules,,text,"Installed date",,,date_mdy,2015-01-01,,,,,RH,,,,
+base_em_enabled,base_external_modules,,radio,"System enabled","1, Yes | 0, No",,,,,,,,RH,,,,
+base_em_disabled_date,base_external_modules,,text,"System Disabled Date",,,date_mdy,2016-01-01,2035-01-01,,"[base_em_enabled] = '0'",,,,,,
+base_em_enabled_project_default,base_external_modules,,radio,"Enable module on all projects by default:","1, Yes | 0, No",,,,,,,,RH,,,,
+base_em_discoverable,base_external_modules,,radio,"Make module discoverable by users","1, Yes | 0, No",,,,,,,,RH,,,,
+base_em_users_enable,base_external_modules,,radio,"Allow normal users to enable this module in projects:","1, Yes | 0, No",,,,,,,,RH,,,,
+base_em_deleted,base_external_modules,,radio,"Is the module deleted?
+It is recommended to use the REDCap ""Delete module"" button to delete an EM.  Just removing the EM folder on the server by hand is not the recommended practice. ","1, Yes (Deleted) | 0, No",,,,,,,,,,,,
+base_em_deleted_date,base_external_modules,,text,"Date Deleted?",,,date_mdy,2010-01-01,2030-01-01,,"[base_em_deleted] = '1'",,RH,,,,
+base_em_notes,base_external_modules,,notes,Notes,,,,,,,,,LH,,,,
+upgrade_directions,upgrade_documentation,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Record what will be upgraded.
+
+<em>While REDCap, the app server, the db server, or anything else is offline, this page within REDCap may be inaccessible.  Please print or save a copy of the steps for your reference incase your not able to navigate back here.</em></p>",,,,,,,,,,,,,
+upgrade_date,upgrade_documentation,,text,"Upgrade Date",,,date_mdy,2020-01-01,2090-01-01,,,,RH,,,,
+upgrade_time_start,upgrade_documentation,,text,"Upgrade Start Time",,,time,,,,,,RH,,,,
+upgrade_time_end,upgrade_documentation,,text,"Upgrade End Time",,,time,,,,,,RH,,,,
+upgrade_redcap,upgrade_documentation,"Upgrade items",radio,REDCap,"1, Yes | 0, No",,,,,,,y,,,upgrade_matrix,,
+upgrade_db_server,upgrade_documentation,,radio,"Database Server","1, Yes | 0, No",,,,,,,y,,,upgrade_matrix,,
+upgrade_app_server,upgrade_documentation,,radio,"Application Server","1, Yes | 0, No",,,,,,,y,,,upgrade_matrix,,
+upgrade_php,upgrade_documentation,,radio,PHP,"1, Yes | 0, No",,,,,,,y,,,upgrade_matrix,,
+upgrade_other,upgrade_documentation,,radio,Other,"1, Yes | 0, No",,,,,,,,,,upgrade_matrix,,
+redcap_current_version,upgrade_documentation,,text,"REDCap current version
+<em>The version that you are upgrading from is [set_up_arm_1][instance_redcap_version]</em>",,,,,,,"[upgrade_redcap] = '1'",,RH,,,,
+redcap_upgrade_to,upgrade_documentation,,text,"Upgrade REDCap to this version",,,,,,,"[upgrade_redcap] = '1'",,RH,,,,
+upgrade_style,upgrade_documentation,,radio,"Type of upgrade","1, Manual | 2, Easy upgrade",,,,,,"[upgrade_redcap] = '1'",,LV,,,," @IF([set_up_arm_1][upgrade_redcap]=1, @DEFAULT=""1"", """")"
+upgrade_redcap_offline,upgrade_documentation,,radio,"1. Set REDCap to OFFLINE: <a href=""[set_up_arm_1][instance_version_url]ControlCenter/general_settings.php"" target=""_blank"">General Settings</a>","1, Yes, Offline | 0, No",,,,,,,,LV,,,,
+upgrade_app_snapshot,upgrade_documentation,,radio,"2a. Take a system snapshot or backup the application server.","1, Snapshot completed | 0, No",,,,,,,,LV,,,,
+upgrade_db_backup,upgrade_documentation,,radio,"2b. Back up the database","1, Backup completed | 0, No",,,,,,,,LV,,,,
+upgrade_load_redcap_files,upgrade_documentation,,radio,"3. Upgrade REDCap: copy the ""redcap"" folder to REDCap application root directory
+<em>Note: please follow the instructions in redcap[redcap_upgrade_to]_upgrade.zip</em>","1, Copied and unzip REDCap upgrade files to folder | 2, No",,,,,,"[upgrade_redcap] = '1'",,LV,,,,
+upgrade_generate_sql,upgrade_documentation,,radio,"4. Visit <a href=""[instance_url]ControlCenter/index.php"" target=""_blank""> [instance_name]</a> to generate SQL scripts, then send the scripts to DBA","1, Scripts created | 0, No, NA",,,,,,"[upgrade_style] = '1'",,LV,,,,
+upgrade_run_sql,upgrade_documentation,,radio,"5. Run generated SQL scripts on the database.","1, SQL script ran successfully | 0, Did not run.  Errors.  NA.",,,,,,"[upgrade_style] = '1'",,LV,,,,
+upgrade_redcap_non_versioned,upgrade_documentation,,radio,"6. If required - Install REDCap non-versioned files. Download the files from the consortium.
+","1, Installed REDCap non-versioned files | 0, No non-version files to update",,,,,,"[upgrade_redcap] = '1'",,LV,,,,
+upgrade_operational,upgrade_documentation,,radio,"7. Check if new REDCap version is operational","1, Yes, Operational | 0, No",,,,,,"[upgrade_redcap] = '1'",,LV,,,,
+upgrade_language_files,upgrade_documentation,,radio,"8. REDCap Language Files update
+
+a. Download updated language files from the REDCap consortium website.
+b. Unzip each language file.
+c. If your institution does not use versioned language files, remove the version from each language file name.
+c. Copy or move the language.ini files to the languages folder within REDCap's root folder.
+","1, Yes, language files updated | 0, No",,,,,,"[upgrade_redcap] = '1'",,LV,,,,
+upgrade_language_confirm,upgrade_documentation,,radio,"9. Assure all available languages show in drop down located in control center before continuing. Control Center -> <a href=""[set_up_arm_1][instance_version_url]ControlCenter/project_settings.php"" target=""_blank"">Default Project Settings -> Language for text displayed within project</a>
+","1, Yes all languages are displayed | 0, No",,,,,,"[upgrade_redcap] = '1'",,LV,,,,
+upgrade_basic_redcap_test,upgrade_documentation,,radio,"10.	Before updating PHP, perform a quick check of basic REDCap functionality
+•	Branching logic in test project
+•	Assure ext. modules page does not have errors
+•	Assure images show correctly in test project
+•	Ability to delete a project.","1, Yes; Basic functionality tests passed | 0, No",,,,,,,,LV,,,,
+upgrade_download_php,upgrade_documentation,,text,"11. Download PHP from <a href=""https://www.php.net/downloads"" target=""_blank"">php.net</a>",,,,,,,"[upgrade_php] = '1'",,LV,,,,
+upgrade_install_php,upgrade_documentation,,text,"12. Install new version of PHP on the application server",,,,,,,"[upgrade_php] = '1'",,LV,,,,
+upgrade_php_ini,upgrade_documentation,,radio,"13. Configure new php . ini
+- extenesion=php_openssl . dll
+- uncomment extension php_fileinfo . dll
+- confirm time zone is correct: example: date.timezone = ""America/New_York""
+<em>This can be done by either copying and pasting the old ini file to the new location</em>","1, PHP . in file is updated | 0, No",,,,,,"[upgrade_php] = '1'",,,,,,
+upgrade_php_ini_2,upgrade_documentation,,radio,"13b. Confirm CRON job is updated to point at the correct PHP version. Visit <a href=""[set_up_arm_1][instance_version_url]/ControlCenter/cron_jobs.php"" target=""_blank"">Cron Jobs</a>","1, Yes, cron job is configured | 0, No",,,,,,"[upgrade_php] = '1'",,,,,,
+upgrade_temp_dir_writable,upgrade_documentation,,radio,"16. Verify/Grant local user, IUSR, read/write/mod rights to the temp directory.  If you are are using windows this may be C:\Windows\Temp
+
+Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/check.php"" target=""_blank""> REDCap Configuration Check Page</a> to confirm.
+
+<em>Additional info
+Check upload_tmp_dir in php . ini. This is directory where PHP stores temporary files while uploading.
+
+Check open_basedir in php . ini. If defined it limits PHP read/write rights to specified path and its subdirectories. Ensure that upload_tmp_dir is inside this path.
+
+Check post_max_size in php . ini. If you want to upload 20 Mbyte files, try something a little bigger, like post_max_size = 21M. This defines largest size of POST message which you are probably using during upload.
+
+Check upload_max_filesize in php . ini. This specifies biggest file that can be uploaded.
+
+Check what user php runs as.
+
+If you make any changes in php . ini restart server so the configuration will be reloaded.
+</em>","1, Application temp folder is writable | 0, No",,,,,,,,,,,,
+upgrade_restart_app_server,upgrade_documentation,,radio,"18b. Restart Application server (IIS or Apache.)","1, Yes, Restarted | 0, No",,,,,,"[upgrade_redcap] = '1' or [upgrade_app_server] = '1' or [upgrade_php] = '1'",,,,,,
+upgrade_remove_old_redcap,upgrade_documentation,,radio,"Recommend
+19. Remove previous versions of REDCap that remain on the server in the REDCap root directory.","1, Yes; Older REDCap version are removed | 0, No",,,,,,"[upgrade_redcap] = '1'",,,,,,
+mig_directions,migration_documentation,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Document anything that will be upgraded.</p>",,,,,,,,,,,,,
+mig_start_date,migration_documentation,,text,"Date Started",,,date_mdy,2021-01-01,2090-01-01,,,,,,,,
+mig_end_date,migration_documentation,,text,"Date Completed",,,date_mdy,2021-01-01,2090-01-01,,,,,,,,
+mig_new_app_server,migration_documentation,"Application Server",radio,"New application server installed","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_app_server_type,migration_documentation,,radio,"Application Server Type","1, IIS | 2, Apache | 3, Other",,,,,,,,RH,,,,
+mig_app_server_type_oth,migration_documentation,,text,"Specify Other",,,,,,,"[mig_app_server_type] = '3'",,RH,,,,
+mig_server_settings,migration_documentation,,radio,"Server settings in place
+IIS: web . config
+Apache: httpd . conf","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_htaccess,migration_documentation,,yesno,"Apache htaccess file in place (if applicable)
+. htaccess files (or ""distributed configuration files"") provide a way to make configuration changes on a per-directory basis. ",,,,,,,"[mig_app_server_type] = '2'",,RH,,,,
+mig_ssl_cert,migration_documentation,,radio,"SSL certificate installed and configured","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_load_balancer,migration_documentation,,radio,"Load Balancer Installed and configured?
+
+A load balancer acts as the ""traffic cop"" sitting in front of your servers and routing client requests across all servers capable of fulfilling those requests in a manner that maximizes speed and capacity utilization and ensures that no one server is overworked, which could degrade performance. If a single server goes down, the load balancer redirects traffic to the remaining online servers. ","1, Yes | 0, No | -1, Unknown/ NA",,,,,,,,RH,,,,
+mig_app_port_open,migration_documentation,,radio,"Outbound and inbound ports open","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_app_port_open_out,migration_documentation,,text,"Specify open outbound ports",,,,,,,"[mig_app_port_open] = '1'",,RH,,,,
+mig_app_port_open_in,migration_documentation,,text,"Specify open inbound ports",,,,,,,"[mig_app_port_open] = '1'",,RH,,,,
+mig_app_server_baltimore,migration_documentation,,radio,"Baltimore CyberTrust Root certificate installed.
+<em>Webservice running on Microsoft Azure machines requires the Baltimore CyberTrust Root Certificate</em>","1, Yes | 0, No | -1, N/A",,,,,,,,RH,,,,
+mig_db_server_installed,migration_documentation,"Database Server:
+Examples: MySQL or Maria DB",radio,"New database server installed","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_mysql_users,migration_documentation,,radio,"MySQL user accounts and permissions are set up","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_db_encoding,migration_documentation,,radio,"Database encoding set","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_db_backup,migration_documentation,,radio,"Database backup created","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_db_migrated,migration_documentation,,radio,"DB migrated to new db server
+(via export/import or mirror or another mechanism)","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_db_mirroring,migration_documentation,,radio,"<p title=""Database mirroring involves two copies of a single database that typically reside on different computers. At any given time, only one copy of the database is currently available to clients. This copy is known as the principal database. Updates made by clients to the principal database are applied on the other copy of the database, known as the mirror database. Mirroring involves applying the transaction log from every insertion, update, or deletion made on the principal database onto the mirror database."">DB Mirroring</p>
+
+","1, Yes | 0, No | -1, Unk / NA",,,,,,,,RH,,,,
+mig_new_php_installed,migration_documentation,PHP,radio,"PHP version installed","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_version,migration_documentation,,text,"PHP Version",,,,,,,,,RH,,,,
+mig_php_ini_settings,migration_documentation,,radio,"Update PHP ini file settings","1, All setting are correct | 0, Not done yet.",,,,,,,,,,,,
+mig_php_ini_timezone,migration_documentation,,radio,"<span style=""padding-left:30px;"">Is  <em>date.timezone</em> correct?</span>","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_extension_dir,migration_documentation,,radio,"<span style=""padding-left:30px;"">Is <em>extension_dir</em> correct?</span>","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_error_log,migration_documentation,,radio,"<div style=""padding-left:30px;"">Are <em>log_errors</em> and <em>error_log </em> correct?
+<em>log_errors:</em>  Tells whether script error messages should be logged to the server's error log or error_log
+<em>error_log:</em> Name of the file where script errors should be logged. The file should be writable by the web server's user.
+</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_session_save,migration_documentation,,radio,"<span style=""padding-left:30px;"">Is <em>session.save_path </em> correct?</span>","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_session_save_2,migration_documentation,,radio,"<div style=""padding-left:30px;"">Are <em>SMTP  </em> and <em> smtp_port </em> correct?
+If they are incorrect email may not work.</div>","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_sendmail,migration_documentation,,radio,"<div style=""padding-left:30px;"">Are <em>sendmail_from</em> and <em> sendmail_path</em> correct?
+Not everyone uses these settings.  Check to see if you do.
+If they are incorrect email may not work.</div>
+
+","1, Yes | 0, No | -1, N/A",,,,,,,,RH,,,,
+mig_php_ini_display_errors,migration_documentation,,radio,"<div style=""padding-left:30px;"">Are <em>display_errors = Off</em> and <em>display_startup_errors = Off  </em>  correct?
+If this is a testing or development server change the setting at your discretion.</div>","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_uploads,migration_documentation,,radio,"<div style=""padding-left:30px;"">Is <em>file_uploads</em> on?
+Whether to allow HTTP file uploads.
+</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_upload_tmp_dir,migration_documentation,,radio,"<div style=""padding-left:30px;"">Is <em>upload_tmp_dir</em> correct?
+The temporary directory used for storing files when doing file upload. Must be writable by whatever user PHP is running as. If not specified PHP will use the system's default.
+When configuring an IIS Web Site or in Apache Site to have a file upload directory, it is proper to locate the physical path outside the application root folder.
+</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_system_temp,migration_documentation,,radio,"<div style=""padding-left:30px;"">Is <em>the server setting for temp files</em> correct and writable?
+If not specified by upload_tmp_dir PHP will use the system's default.  The temporary directory set by the server and used for storing files when doing file upload. Must be writable by whatever user PHP is running as. 
+</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_memory_limit,migration_documentation,,radio,"<div style=""padding-left:30px;"">Is <em>memory_limit </em> correct?
+The PHP memory_limit is the maximum amount of server memory that each PHP script is allowed to consume.
+</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_post_max,migration_documentation,,radio,"<div style=""padding-left:30px;"">Is <em>post_max_size </em> correct?
+post_max_size  sets max size of post data allowed. This setting also affects file upload. To upload large files, this value must be larger than upload_max_filesize. 
+</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_upload_max,migration_documentation,,radio,"<div style=""padding-left:30px;"">Is <em>upload_max_filesize </em> correct?
+The maximum size of an uploaded file. post_max_size must be larger than this value.
+</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_input_time,migration_documentation,,radio,"<div style=""padding-left:30px;"">Is <em>max_input_time</em> correct?
+This sets the maximum time in seconds a script is allowed to parse input data, like POST and GET.
+</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_input_time_2,migration_documentation,,radio,"<div style=""padding-left:30px;"">Is <em>max_input_vars</em> correct?
+The PHP Max Input Vars is the maximum number of variables your server can use for a single function</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_ini_mysql,migration_documentation,,radio,"<div style=""padding-left:30px;"">Is one of the mysql or mysqli extensions enabled?
+1) ;extension=php_mysql.so
+2) ;extension=php_mysqli.so
+
+The mysql no longer works in PHP 7. It has been replaced with mysqli.
+</div>
+
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_custom_php,migration_documentation,,radio,"Customized PHP files/folders are moved
+<em>Some institution prefer to move the database.php file outside of the web root.</em>
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_php_libraries,migration_documentation,,radio,"PHP extensions installed and enabled.
+","1, Yes | 0, No",,,,,,,,RH,,,,
+servers_restarted,migration_documentation,"Ensure settings are applied.",radio,"Application Server and Database Server restarted?
+Ensures that all settings are in place during testing.","1, Yes | 0, No | -1, Not necessary",,,,,,,,RH,,,,
+mig_redcap_files,migration_documentation,REDCap,radio,"REDCap files uploaded  to application server.
+<em>These may be called web root files.</em>","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_redcap_db_settings,migration_documentation,,radio,"REDCap database.php has the correct database connection settings","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_redcap_offline,migration_documentation,,radio,"REDCap is set to offline mode <em>before</em> migration","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_redcap_online,migration_documentation,,radio,"REDCap is set to online mode <em>after</em> migration
+This may be one of the last steps","1, Yes, offline after migration completed. | 0, No",,,,,,,,,,,,
+mig_redcap_config_page,migration_documentation,,radio,"REDCap configuration page loads correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_new_file_strorage,migration_documentation,"File Storage
+(eDocs)",radio,"File storage server installed (if applicable)","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_edcos_backup,migration_documentation,,radio,"Old eDocs folder backed up","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_edocs_migrated,migration_documentation,,radio,"eDocs copied or moved to new location","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_edocs_outside_root,migration_documentation,,radio,"Is the eDocs folder located outside of the web root directory?","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_edocs_writable,migration_documentation,,radio,"is the eDocs folder writable?","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_edocs_help,migration_documentation,,descriptive,"The eDocs can reside on the same server as the application.  It is a good practice to store the user generated/uploaded documents to a separate server.  At minimum the eDocs folder should be placed outside of the web root.  If a user can navigate to the eDocs folder URL and manages to know a file name, the user can download the file directly without checking permissions and in some cases not even being an authenticated user.",,,,,,,,,,,,,
+mig_email,migration_documentation,eMail,radio,"Is Email configured?
+(SMTP server, Send Mail, Send Grid, etc)","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_email_server,migration_documentation,,radio,"Able to send emails?","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_cron_setting,migration_documentation,CRON,radio,"CRON configured to run on application server.
+Note: REDCap CRON job can be installed but not running.","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_cron_running,migration_documentation,,radio,"CRON running","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_dns_settings,migration_documentation,"DNS Servers",radio,"DNS settings updated
+(This may be necessary if the URL changed or the server IP changed)","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_security_scan,migration_documentation,"Security Scans",radio,"Security Scan completed and passes","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_api_hardcode_paths,migration_documentation,API,radio,"API paths updated
+If the URL changes the API calls must use the new URL","1, Yes | 0, No (did not change)",,,,,,,,RH,,,,
+mig_auth_app_installed,migration_documentation,Authentication,radio,"Authentication application/agent installed.
+
+REDCap can use Shibboleth, LDAP, SAMS Agent, or other authentication process in addition to table based authenticaion.","1, Yes | 0, No | -1, NA/ table based auth",,,,,,,,RH,,,,
+mig_old_instance,migration_documentation,"Old Environment",radio,"Old environment offline including
+<ul>
+<li>Application server</li>
+<li>MySQL or Maria DB server</li>
+<li>Database backup in secure location</li>
+</ul>
+","1, Yes | 0, No",,,,,,,,RH,,,,
+mig_notes,migration_documentation,,notes,"Migration Notes",,,,,,,,,LH,,,,
+test_directions,testing_documentation,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Document things specific to this test.</p>",,,,,,,,,,,,,
+test_date,testing_documentation,,text,"Test Date",,,date_mdy,2000-01-01,2040-01-01,,,,RH,,,," @TODAY"
+test_time,testing_documentation,,text,"Test Time",,,time,,,,,,RH,,,," @NOW"
+test_redcap_version,testing_documentation,,text,"REDCap version tested
+Current REDCap version: [redcap-version]",,,,,,,,,,,,," @DEFAULT=""[redcap-version]"""
+test_tester_name,testing_documentation,,text,"Tester user name",,,,,,,,,RH,,,," @USERNAME"
+test_tester_email,testing_documentation,,text,"Tester email",,,email,,,,,,RH,,,," @DEFAULT=""[user-email]"""
+test_reason,testing_documentation,,radio,"Reason for test","0, Installation | 1, Upgrade | 2, Migration | 3, Issue | 4, Training | 5, Other",,,,,,,,,,,,
+test_reason_explaination,testing_documentation,,notes,"Why was the testing initiated?  Please be brief.",,,,,,,,,RH,,,," @WORDLIMIT=99"
+test_final_result,testing_documentation,,radio,"Final Test Results","1, Pass | 0, Fail",,,,,,,,RH,,,,
+test_notes,testing_documentation,,notes,"Testing Notes
+(Include any information particular to this test)",,,,,,,,,LV,,,,
+help_directions,helper_files,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">The files below are to aide in the testing process.  Testing will include uploading project XML and other files. 
+ This is where you get those files.</p>",,,,,,,,,,,,,
+zipped_project_xml,helper_files,,descriptive,"The Sample XML project file in zip format can be downloaded here. ",,,,,,,,,,,,,
+multi_language_project_xml,helper_files,,descriptive,"Download a sample project XML that contains multi-languages.",,,,,,,,,,,,,
+public_survey_xml,helper_files,,descriptive,"Download a project XML for a very simple public survey project.",,,,,,,,,,,,,
+test_designer_xml,helper_files,,descriptive,"To restore the Test Designer instrument, delete the old instrument, download this instrument and then import this single instrument.",,,,,,,,,,,,,
+status_instance_info,status_report,,descriptive,"<table class=""table""><tr><th>Test<th>Status</th></tr><tr><td>Instance Info</td><td>[set_up_arm_1][instance_info_complete]</td></tr><tr><td>Contact Info (for ASIs, Alerts, Etc)</td><td>[set_up_arm_1][contact_info_for_asis_alerts_etc_complete]</td></tr><tr><td>Base Configuration Check Page</td><td>[set_up_arm_1][base_configuration_check_page_complete]</td></tr><tr><td>Data Export and Import</td><td>[data_export_and_import_complete]</td></tr><tr><td>Online Designer</td><td>[online_designer_complete]</td></tr><tr><td>Codebook</td><td>[codebook_complete]</td></tr>
+<tr><td>Test Configuration Check</td><td>[test_configuration_check_complete]</td></tr><tr><td>Action Tags</td><td>[action_tags_complete]</td></tr><tr><td>Calculated Fields</td><td>[calculated_fields_complete]</td></tr><tr><td>Basic Skip Patterns</td><td>[basic_skip_patterns_complete]</td></tr><tr><td>Embedded Fields</td><td>[embedded_fields_complete]</td></tr><tr><td>Smart Variables</td><td>[smart_variables_complete]</td></tr><tr><td>Missing Values</td><td>[missing_values_complete]</td></tr><tr><td>Validations Default</td><td>[validations_default_complete]</td></tr><tr><td>Validations Additional Available</td><td>[validations_additional_available_complete]</td></tr><tr><td>File Upload Field</td><td>[file_upload_field_complete]</td></tr><tr><td>Bio Portal</td><td>[bio_portal_complete]</td></tr><tr><td>Field Bank</td><td>[field_bank_complete]</td></tr><tr><td>Data Dictionary</td><td>[data_dictionary_complete]</td></tr><tr><td>DAGs</td><td>[dags_complete]</td></tr><tr><td>ASI Email Trigger (Part 1)</td><td>[asi_email_trigger_part_1_complete]</td></tr><tr><td>ASI Survey (Part 2)</td><td>[asi_survey_part_2_complete]</td></tr><tr><td>ASI Confirmation email (Part 3)</td><td>[asi_confirmation_email_part_3_complete]</td></tr><tr><td>Alerts and Notifications</td><td>[alerts_and_notifications_complete]</td></tr><tr><td>Multi-Language Set Up</td><td>[multilanguage_set_up_complete]</td></tr><tr><td>Multi-Language Instrument</td><td>[multilanguage_instrument_complete]</td></tr><tr><td>Link Shortening Service</td><td>[link_shortening_service_complete]</td></tr><tr><td>Project Creation</td><td>[project_creation_complete]</td></tr><tr><td>File Repository</td><td>[file_repository_complete]</td></tr><tr><td>Project Creation by XML upload</td><td>[project_creation_by_xml_upload_complete]</td></tr><tr><td>Project Creation by Template</td><td>[project_creation_by_template_complete]</td></tr><tr><td>Project Deletion</td><td>[project_deletion_complete]</td></tr><tr><td>Calendar</td><td>[calendar_complete]</td></tr><tr><td>Data Reports</td><td>[data_reports_complete]</td></tr><tr><td>Project Logging</td><td>[project_logging_complete]</td></tr><tr><td>Project Email Logging</td><td>[email_logging_complete]</td></tr><tr><td>Field Comment</td><td>[field_comment_complete]</td></tr><tr><td>User Rights</td><td>[user_rights_complete]</td></tr><tr><td>Custom Record Locking and E-Signature</td><td>[custom_record_locking_and_esignature_complete]</td></tr><tr><td>Data Quality Rules</td><td>[data_quality_rules_complete]</td></tr><tr><td>Project API</td><td>[project_api_complete]</td></tr><tr><td>Mobile App</td><td>[mobile_app_complete]</td></tr><tr><td>Notifications and Reporting</td><td>[notifications_and_reporting_complete]</td></tr><tr><td>System Statistics</td><td>[system_statistics_complete]</td></tr><tr><td>System Activity Log</td><td>[system_activity_log_complete]</td></tr><tr><td>Map of Users</td><td>[map_of_users_complete]</td></tr><tr><td>Browse Projects</td><td>[browse_projects_complete]</td></tr><tr><td>Edit Project Settings</td><td>[projects_settings_complete]</td></tr><tr><td>Survey Link Lookup</td><td>[survey_link_look_up_complete]</td></tr><tr><td>Browse Users</td><td>[browse_users_complete]</td></tr><tr><td>User Allow List</td><td>[user_allow_list_complete]</td></tr>
+<tr><td>Email Users</td><td>[email_users_complete]</td></tr><tr><td>API Tokens</td><td>[api_tokens_complete]</td></tr><tr><td>Banned IP Addresses</td><td>[banned_ip_addresses_complete]</td></tr>
+<tr><td>Administer Privileges</td><td>[admin_privileges_complete]</td></tr>
+</table>",,,,,,,,,,,,,
+data_import_directions,data_export_and_import,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Import data into this instrument.
+
+Steps:
+1) Export and download the data from this instrument.
+2) The Record name is [record-name].  The event is [event-name]
+3) Add or change the data only for this record and event in the csv file.
+4) It is a good practice to remove all other rows of data.
+4) Import the modified csv file.
+5) Verify that it worked.
+6) Don't worry if errors occur during import.  Fix any errors and import the data.
+7) Mark this form as complete after the data has been imported successfully. 
+</p>",,,,,,,,,,,,,
+data_import_successful,data_export_and_import,,radio,"Did the data upload to here successfully?","1, Yes | 0, No",,,,,,,,RH,,,,
+data_import_text,data_export_and_import,,text,"Any text can be imported into this text field.  Change the text to ensure the upload was successful. 
+
+For example if the old text is 9, upload the a new number 1234567.  Today's date or time is another good option. ",,,,,,,,,,,,,
+data_import_note,data_export_and_import,,notes,Note,,,,,,,,,LH,,,,
+online_designer_directions,online_designer,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Test REDCap's online designer.</p><p>After the test is completed, this instrument can be deleted and then restored via the ""Import Instrument"" and using the file from ""Designer Instrument"" download field in the <a href=""[set_up_arm_1][form-link:helper_files: Helper Files]"" target=""_blank"">Helper Files</a> instrument.
+
+A basic test may involve the following steps:
+
+<ol style=""line-height: .9em;"">
+<li>Create the following fields
+<ol type=""A"">
+<li>Text</li>
+<li>Text with validation (date, integer, time, email, etc.)</li>
+<li>Note</li>
+<li>Calculated</li>
+<li>Drop down choice field with several options</li>
+<li>Drop down radio field with several options</li>
+<li>Check box</li>
+<li>Yes-No</li>
+<li>True-False</li>
+<li>Signature</li>
+<li>File Upload</li>
+<li>Slider</li>
+<li>Descriptive  (add HTML to this field such as Bold, Center, etc.)</li>
+<li>Begin New Section</li>
+<li>Dynamic SQL (if enabled)</li>
+<li>Create a matrix</li>
+</ol>
+</li>
+<li>If ""Import from Field Bank"" is enabled, import a field from the field bank</li>
+<li>After the fields are created, edit a field or more.</li>
+<li>Reorder the fields within the matrix.</li>
+<li>Reorder any of the fields above.</li>
+<li>Add action tags to any of the fields above.</li>
+<li>Duplicate any field.</li>
+<li>Delete any field.</li>
+<li>Add branching logic to a field.</li>
+<li>Embed a field in the descriptive field above.</li>
+<li>Pipe one field into another field.</li>
+<li>Add a smart variable to the descriptive field.</li>
+<li>Add an inline image to the descriptive field.</li>
+</ol>",,,,,,,,,,,,,
+config_check_directions,test_configuration_check,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Record the results of the Configuration Check page and compare them to the baseline results
+For reference: <a style=""color:#FFF;"" href=""[set_up_arm_1][instance_version_url]ControlCenter/check.php"" target=""_blank""> REDCap Configuration Check Page</a></p>",,,,,,,,,,,,,
+config_check_date,test_configuration_check,,text,"Date of test",,,date_mdy,2021-01-01,2080-01-01,,,,,,,," @TODAY"
+config_check_time,test_configuration_check,,text,"Start time of test",,,time,,,,,,,,,," @NOW-SERVER"
+config_pass_needed,test_configuration_check,,text,"Number of Configuration Test Passed at Baseline:
+Link: [set_up_arm_1][form-link:base_configuration_check_page:Base Config Results Page]",,,integer,0,99,,,,,,,," @DEFAULT=""[set_up_arm_1][base_config_pass_count]"""
+config_total_passed,test_configuration_check,,calc,"Number of passing tests
+<em>Note: Depending on configuration not all test may need to be passed. Total number of test: 26</em>","sum(  if([config_file_structure] = ""1"",1,0), if([config_table_redcap_config] = ""1"",1,0), if([config_db_structure] = ""1"",1,0), if([config_curl] = ""1"",1,0), if([config_consortium_server] = ""1"",1,0), if([config_cron] = ""1"",1,0), if([config_ssl] = ""1"",1,0), if([config_php_version] = ""1"",1,0), if([config_mysql_version] = ""1"",1,0), if([config_gd_library] = ""1"",1,0), if([config_php_fileinfo] = ""1"",1,0), if([config_send_emails] = ""1"",1,0), if([config_max_input_vars] = ""1"",1,0), if([config_hook_functions] = ""1"",1,0), if([config_mysql_performance] = ""1"",1,0), if([config_web_temp_writable] = ""1"",1,0), if([config_temp_dir] = ""1"",1,0), if([config_file_uploads] = ""1"",1,0), if([config_modules_writable] = ""1"",1,0), if([config_twilio] = ""1"",1,0), if([config_promis] = ""1"",1,0), if([config_bioportal] = ""1"",1,0), if([config_url_short] = ""1"",1,0), if([config_recaptcha] = ""1"",1,0), if([config_field_bank] = ""1"",1,0), if([config_cookie] = ""1"",1,0)  )","(# needed to pass)",,,,,,,,,,,
+config_checks_verified,test_configuration_check,,radio,"Default values are set to the baseline values, which may need to be updated.  Please verify each item below is accurate in the Configuration Check Page.
+
+When every item is verified select ""Results are accurate"".  A comparison will appear with a computer generated comparison between baseline and this test results.  The computer generated result will disappear while ""Verifying"" is selected.","1, Results are accurate | 0, Verifying",,,,,,,,RH,,,,
+config_pass_banner,test_configuration_check,,descriptive,"<h5 style=""background-color:green;color:white; padding:20px;"">Compared to baseline the same are more tests are passing.<h5>",,,,,,,"([config_total_passed] >= [config_pass_needed])
+and [config_checks_verified] = 1",,,,,,
+config_fail_banner,test_configuration_check,,descriptive,"<h5 style=""background-color:red;color:white; padding:20px;"">Compared to baseline less tests are passing.<h5>",,,,,,,"([config_total_passed] < [config_pass_needed])
+and [config_checks_verified] = 1",,,,,,
+config_test_note,test_configuration_check,,notes,Notes,,,,,,,,,LH,,,,
+config_file_structure,test_configuration_check,,radio,"TEST 1: Establish basic REDCap file structure
+<em>Base status: [set_up_arm_1][base_config_file_structure:value]</em>","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_file_structure:value]"""
+config_file_structure_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_file_structure] <>  ""1""",,LV,,,,
+config_table_redcap_config,test_configuration_check,,radio,"TEST 2: Connect to the table named ""redcap_config""","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_table_redcap_config:value]"""
+config_table_redcap_config_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_table_redcap_config]  <>  ""1""",,LV,,,,
+config_db_structure,test_configuration_check,,radio,"TEST 3: Check REDCap database table structure","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_db_structure:value]"""
+config_db_structure_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_db_structure] <>  ""1""",,LV,,,,
+config_curl,test_configuration_check,,radio,"TEST 4: Check if PHP cURL extension is installed","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_curl:value]"""
+config_curl_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_curl] <>  ""1""",,LV,,,,
+config_consortium_server,test_configuration_check,,radio,"TEST 5:  Checking communication with REDCap Consortium server","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_consortium_server:value]"""
+config_consortium_server_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_consortium_server]  <>  ""1""",,LV,,,,
+config_cron,test_configuration_check,,radio,"TEST 6: Check if REDCap Cron Job is running","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_cron:value]"""
+config_cron_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_cron]  <>  ""1""",,LV,,,,
+config_ssl,test_configuration_check,"Secondary tests",radio,"Using SSL","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_ssl:value]"""
+config_ssl_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_ssl]  <>  ""1""",,LV,,,,
+config_php_version,test_configuration_check,,radio,"Using PHP 7.2.5 or higher","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_php_version:value]"""
+config_php_version_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_php_version]  <>  ""1""",,LV,,,,
+config_mysql_version,test_configuration_check,,radio,"Using MySQL 5.5.5 or higher","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_mysql_version:value]"""
+config_mysql_version_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_mysql_version]  <>  ""1""",,LV,,,,
+config_gd_library,test_configuration_check,,radio,"GD library (version 2 or higher) is installed","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_gd_library:value]"""
+config_gd_library_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_gd_library]  <>  ""1""",,LV,,,,
+config_php_fileinfo,test_configuration_check,,radio,"PHP Fileinfo extension is installed","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_php_fileinfo:value]"""
+config_php_fileinfo_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_php_fileinfo]  <>  ""1""",,LV,,,,
+config_send_emails,test_configuration_check,,radio,"REDCap is able to send emails","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_send_emails:value]"""
+config_send_emails_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_send_emails]  <>  ""1""",,LV,,,,
+config_max_input_vars,test_configuration_check,,radio,max_input_vars,"1, Pass | 0, Fail | 2, Recommendation",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_max_input_vars:value]"""
+config_max_input_vars_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_max_input_vars] <>  ""1""",,LV,,,,
+config_hook_functions,test_configuration_check,,radio,"Hook functions","1, Pass | 0, Fail | 2, Recommendation",,,,,,,,RH,,,," @DEFAULT=""[set_up_arm_1][base_config_hook_functions:value]"""
+hook_functions_msg,test_configuration_check,,notes,,,,,,,,"[config_hook_functions] <> '1'",,LV,,,,
+config_mysql_performance,test_configuration_check,,radio,"MySQL configuration settings appear sufficient for optimal performance and stability","1, Pass | 0, Fail | 2, Recommendation",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_mysql_performance:value]"""
+config_mysql_performance_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_mysql_performance]  <>  ""1""",,LV,,,,
+config_web_temp_writable,test_configuration_check,,radio,"The REDCap web server's temp directory is writable","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_web_temp_writable:value]"""
+config_web_temp_writable_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_web_temp_writable] <>  ""1""",,LV,,,,
+config_temp_dir,test_configuration_check,,radio,"""temp"" directory is writable","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_temp_dir:value]"""
+config_temp_dir_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_temp_dir] <>  ""1""",,LV,,,,
+config_file_uploads,test_configuration_check,,radio,"File upload directory is writable","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_file_uploads:value]"""
+config_file_uploads_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_file_uploads] <>  ""1""",,LV,,,,
+config_modules_writable,test_configuration_check,,radio,"""modules"" directory is writable","1, Pass | 0, Fail",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_modules_writable:value]"""
+config_modules_writable_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_modules_writable] <>  ""1""",,LV,,,,
+config_twilio,test_configuration_check,,radio,"Checking communication with Twilio telephony API services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_twilio:value]"""
+config_twilio_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_twilio] = 0",,LV,,,,
+config_promis,test_configuration_check,,radio,"Checking communication with PROMIS assessment API services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_promis:value]"""
+config_promis_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_promis] = '0'",,LV,,,,
+config_bioportal,test_configuration_check,,radio,"Checking communication with BioPortal biomedical ontology API services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_bioportal:value]"""
+config_bioportal_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_bioportal] = '0'",,LV,,,,
+config_url_short,test_configuration_check,,radio,"Checking communication with REDCAP.LINK URL shortening API services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_url_short:value]"""
+config_url_short_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_url_short] = '0'",,LV,,,,
+config_recaptcha,test_configuration_check,,radio,"Google reCAPTCHA API services","1, Pass | 0, Fail | 2, Recommendation | -1, Disabled",,,,,,,,RH,,,," @DEFAULT=""[set_up_arm_1][base_config_recaptcha:value]"""
+config_recaptcha_msg,test_configuration_check,,notes,Description,,,,,,,"[config_recaptcha] = '0' or [config_recaptcha] = '2'",,LH,,,,
+config_field_bank,test_configuration_check,,radio,"Checking communication with Field Bank NLM services","1, Pass | 0, Fail | -1, Disabled",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_field_bank:value]"""
+config_field_bank_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_field_bank] = '0'",,LV,,,,
+config_cookie,test_configuration_check,,radio,"For better security, it is recommended that you enable the session.cookie_secure option in your web server's PHP . INI file. ","1, Pass | 0, Fail | 2, Recommendation",,,,,,,,RH,,,," @DEFAULT= ""[set_up_arm_1][base_config_cookie:value]"""
+config_cookie_msg,test_configuration_check,,notes,"Warning or Fail Description",,,,,,,"[config_cookie] <>  ""1""",,LV,,,,
+action_tags_directions,action_tags,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Confirm that all action tags are working properly.</p>",,,,,,,,,,,,,
+action_tag_help,action_tags,,radio,"Show complete definition of each action tag?","1, Yes | 0, No",,,,,,,,RH,,,," @DEFAULT=0"
+at_appusername_app,action_tags,,text,@APPUSERNAME-APP,,,,,,,,,RH,,,," @APPUSERNAME-APP"
+at_appusername_app_help,action_tags,,descriptive,"@APPUSERNAME-APP: In the REDCap Mobile App, it sets a field's value to the app username of the current mobile app user - i.e., their username in the mobile app, which is not necessarily the same as their REDCap server username that can be captured using @USERNAME. 
+
+NOTE: For use only in the REDCap Mobile App.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_barcode_app,action_tags,,text,@BARCODE-APP,,,,,,,,,RH,,,," @BARCODE-APP"
+at_barcode_app_help,action_tags,,descriptive,"@BARCODE-APP: Allows the REDCap Mobile App to capture the value of a barcode or QR code by scanning it with the device's camera. 
+
+NOTE: For use only in the REDCap Mobile App.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_calcdate_input,action_tags,,text,"Date to add 7 days to in the @CALCDATE below.",,,date_mdy,,,,,,,,,," @TODAY"
+at_calcdate,action_tags,,text,"@CALCDATE (example shows today + 7 days)",,,date_mdy,,,,,,RH,,,," @CALCDATE([at_calcdate_input], 7, 'd')"
+at_calcdate_help,action_tags,,descriptive,"@CALCDATE: Performs a date calculation by adding or subtracting a specified amount of time from a specified date or datetime field and then provides the result as a date or datetime value - e.g., @CALCDATE([visit_date], 7, 'd'). The first parameter inside the @CALCDATE() function should be a text field with date, datetime, or datetime_seconds validation, in which you may specify (if needed) the event and repeating instance - e.g., @CALCDATE([baseline_event][visit_date], 7, 'd'). The second parameter represents the offset number amount that should be added or subtracted. It can be a decimal number or integer. Tip: To subtract (i.e., go backwards in time), use a negative number. The third parameter represents the units of the offset amount, which will be represented by the following options: 'y' (years, 1 year = 365.2425 days), 'M' (months, 1 month = 30.44 days), 'd' (days), 'h' (hours), 'm' (minutes), 's' (seconds). The unit option must be wrapped in quotes or apostrophes. NOTE: Both the source field and the result field must be a text field with date, datetime, or datetime_seconds validation. It is important to realize that a field with @CALCDATE will not be editable on the survey page or data entry form, and the field will function almost exactly like a normal calculated field, in which its value may get updated via a data import, when running Data Quality rule H, or in real-time during normal data entry on a form or survey.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_calctext_input,action_tags,,text,"String that calc text will use in its calculation.",,,,,,,,,RH,,,," @DEFAULT=""Apples"""
+at_calctext,action_tags,,text,@CALCTEXT,,"Apples was entered. (default calculated)",,,,,,,RH,,,," @CALCTEXT(if([at_calctext_input]= 'Apples'),'Apples was entered.', 'If it is not ""Apples"", above this text appears.')"
+at_calctext_2,action_tags,,descriptive,"@CALCTEXT: Evaluates logic that is provided inside a @CALCTEXT() function and outputs the result as text, typically performed with an if(x,y,z) function - e.g., @CALCTEXT(if([gender]='1', 'male', 'female')). NOTE: It is important to realize that a field with @CALCTEXT will not be editable on the survey page or data entry form, and the field will function almost exactly like a normal calculated field, in which its value may get updated via a data import, when running Data Quality rule H, or in real-time during normal data entry on a form or survey. If desired, it is possible to return the value as a number - e.g., @CALCTEXT(if([age] >= 18, 'adult', 5*[other_field])). Also, while it is possible to use static text (in quotes), field variables, or Smart Variables as the return values of the IF function - e.g., @CALCTEXT(if([age] >= 18, [dob], [event-label]) - it is NOT possible to pipe field variables or Smart Variables inside quotes for the return values.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_charlimit,action_tags,,text,@CHARLIMIT,,@CHARLIMIT=9,,,,,,,RH,,,," @DEFAULT=""0CharLeft"" @CHARLIMIT=9"
+at_charlimit_help,action_tags,,descriptive,"@CHARLIMIT: Sets the maximum number of characters that can be entered into a Text field or Notes field, and also displays the number of characters remaining. The format must follow the pattern @CHARLIMIT=??, in which ?? is the desired max character count (alternatively, the number value can be inside single or double quotes). NOTE: This action tag cannot be used at the same time as @WORDLIMIT for the same field. NOTE: This action tag does *not* get applied during any data imports (via API or Data Import Tool) but only operates when viewing survey pages and data entry forms.",,@CHARLIMIT=9,,,,,"[action_tag_help] = 1",,,,,,
+at_default,action_tags,,text,@DEFAULT,,"@DEFAULT='I am a default value'",,,,,,,RH,,,," @DEFAULT=""I am a default value"""
+at_default_help,action_tags,,descriptive,"@DEFAULT:  Sets a field's initial value. This allows a field to have a specified default value when viewing the field on a survey or data entry form that has not yet had any data saved for it (i.e., when the form status icon is gray or when a survey page has not had any data entered yet). The format must follow the pattern @DEFAULT=""????"", in which the desired default value should be inside single or double quotes. For checkbox fields, simply separate multiple checkbox values with commas - e.g., @DEFAULT='1,3,6'. For text fields, you may even perform Piping inside the default value to pipe data from another field in the project - e.g., @DEFAULT='Name: [first_name] [last_name], DOB: [dob]'. NOTE: The default value does *not* get applied during any data imports (via API or Data Import Tool) but only operates when viewing survey pages and data entry forms. NOTE: If being used on a date or datetime field, the date value inside the quotes must be in Y-M-D format - e.g., @DEFAULT='2007-12-25' - regardless of the field's set date format.",,"@DEFAULT='I am a default value'",,,,,"[action_tag_help] = 1",,,,,,
+at_hidden,action_tags,"There are 5 fields, 
+
+@HIDDEN, 
+@HIDDEN-APP, 
+@HIDDEN-FORM,
+@HIDDEN-PDF,
+@HIDDEN-SURVEY
+
+ below.  Verify the appropriate ones are not displayed.",text,@HIDDEN,,@HIDDEN,,,,,,,RH,,,," @HIDDEN"
+at_hidden_help,action_tags,,descriptive,"@HIDDEN: Hides the field on the survey page, the data entry form, and in the REDCap mobile app. Field will stay hidden even if branching logic attempts to make it visible.",,@HIDDEN,,,,,"[action_tag_help] = 1",,,,,,
+at_hidden_app,action_tags,,text,@HIDDEN-APP,,,,,,,,,RH,,,," @HIDDEN-APP"
+at_hidden_app_help,action_tags,,descriptive,"@HIDDEN-APP: Hides the field only on the form ONLY on the REDCap Mobile App. Field will stay hidden even if branching logic attempts to make it visible.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_hidden_form,action_tags,,text,@HIDDEN-FORM,,,,,,,,,RH,,,," @HIDDEN-FORM"
+at_hidden_form_help,action_tags,,descriptive,"@HIDDEN-FORM: Hides the field only on the data entry form (i.e., not on the survey page). Field will stay hidden even if branching logic attempts to make it visible.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_hidden_pdf,action_tags,,text,@HIDDEN-PDF,,,,,,,,,RH,,,," @HIDDEN-PDF"
+at_hidden_pdf_help,action_tags,,descriptive,"@HIDDEN-PDF: Hides the field only in the downloaded PDF of one or more instruments (including blank PDFs, PDFs with data, and compact PDFs with data). Note: Other @HIDDEN action tags will not hide fields inside PDF exports, so @HIDDEN-PDF must be used specifically to hide fields in PDFs.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_hidden_survey,action_tags,,text,@HIDDEN-SURVEY,,,,,,,,,RH,,,," @HIDDEN-SURVEY"
+at_hidden_survey_help,action_tags,,descriptive,"@HIDDEN-SURVEY: Hides the field only on the survey page (i.e., not on the data entry form). Field will stay hidden even if branching logic attempts to make it visible.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_hidebutton,action_tags,,text,@HIDEBUTTON,,"(There should be no Now or Today button)",datetime_mdy,,,,,,RH,,,," @HIDEBUTTON"
+at_hidebutton_help,action_tags,,descriptive,"@HIDEBUTTON: Hides the 'Now' or 'Today' button that is typically displayed to the right of date, time, and date/time fields.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_hidechoice,action_tags,,checkbox,@HIDECHOICE,"1, 1: Displayed | 2, 2: Visible | 3, 3: Hidden by Action tag | 4, 4: You can see this","@HIDECHOICE=3 (four choices defined)",,,,,,,,,,," @HIDECHOICE=""3"""
+at_hidechoice_help,action_tags,,descriptive,"@HIDECHOICE: Hides one or more choices of a multiple choice field. This action tag is useful if you wish to retire a particular choice after utilizing it for a while in data collection, thus allowing you to hide the choice from that point afterward without orphaning any of the choice's data, which would happen if you simply deleted the choice. The format must follow the pattern @HIDECHOICE='??', in which the coded values should be inside single or double quotes for the choice(s) you wish to hide. If more than one choice needs to be hidden, then provide all the coded values separated by commas. For example, to hide the choice 'Monday (1)', you would have @HIDECHOICE='1', but if you wanted to additionally hide 'Tuesday (2)', you would have @HIDECHOICE='1,2'. NOTE: If the hidden choice has already been selected for a given record, then the choice will not be hidden on the survey or form for that record/event. NOTE: Hidden choices will still appear in reports and data exports. NOTE: This action tag can only be utilized for the following field types: Checkbox, Radio, Drop-down, Yes-No, and True-False. NOTE: This action tag works only in limited fashion with a matrix of fields, in which it will simply hide the checkbox/radio for a field in the matrix but still display the column for that choice in the matrix.",,"@HIDECHOICE=3 (four choices defined)",,,,,"[action_tag_help] = 1",,,,,,
+at_inline,action_tags,,text,"@INLINE (currently not displaying an image)",,,,,,,,,RH,,,,
+at_inline_help,action_tags,,descriptive,"@INLINE: Allows a PDF file or image file (JPG, JPEG, GIF, PNG, TIF, BMP) that is uploaded to a File Upload field to be displayed in an inline manner on the survey page or data entry form so that the PDF/image can be viewed by the user or survey participant without having to download it. The PDF/image will be displayed inline on the page immediately above the download link for the field and will be displayed with 100% width by default (i.e., 100% width of the area in which it is contained). Images will be displayed with their native width:height ratio, although PDFs will be displayed with a 300 pixel height by default. If you wish to manually set the width and/or height of the image/PDF, you may put the width/height values inside parentheses after the action tag in the following manner: @INLINE(width) or @INLINE(width,height). The width/height can be a percentage value (e.g., 50%) or a number representing size in pixels (e.g., 400). Thus @INLINE(50%) will display an image at 50% size for the area in which it is contained on the page, and @INLINE(400,100) would display the image always at 400px tall and 100px wide. To make an inline PDF appear taller on the page, you might use @INLINE(100%,600) since 300px is the default height for inline PDFs. Note: The @INLINE action tag also works if the File Upload field is embedded inside another field on the page.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_latitude,action_tags,,text,@LATITUDE,,,,,,,,,RH,,,," @LATITUDE"
+at_latitude_help,action_tags,,descriptive,"@LATITUDE: Allows a Text field field to capture the latitude of the user, in which the user will be prompted on the webpage to allow or deny this. Once the value is captured, it will not be changed when visiting the page at a later time. The field will be disabled and will not allow users to edit the value, but it will allow them to remove the value altogether. NOTE: While the GPS value will be very accurate when captured on a mobile device, it will not be nearly as accurate when using a browser on laptops and desktop computers.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_longitude,action_tags,,text,@LONGITUDE,,,,,,,,,RH,,,," @LONGITUDE"
+at_longitude_help,action_tags,,descriptive,"@LONGITUDE
+
+Allows a Text field to capture the longitude of the user, in which the user will be prompted on the webpage to allow or deny this. Once the value is captured, it will not be changed when visiting the page at a later time. The field will be disabled and will not allow users to edit the value, but it will allow them to remove the value altogether. NOTE: While the GPS value will be very accurate when captured on a mobile device, it will not be nearly as accurate when using a browser on laptops and desktop computers.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_maxchecked,action_tags,,checkbox,@MAXCHECKED,"A, A | B, B | C, C | D, D | E, E | F, F",@MAXCHECKED=3,,,,,,,,,,," @MAXCHECKED=3"
+at_maxchecked_help,action_tags,,descriptive,"@MAXCHECKED: Allows a checkbox field to have a maximum number of checkboxes that can be checked. If other checkbox options are clicked after the maximum has been reached, those choices will not be able to be checked. The format must be @MAXCHECKED=#, in which # is a positive integer. For example, @MAXCHECKED=3 will allow a maximum of 3 checkbox choices to be checked. NOTE: This action tag can only be utilized by Checkbox fields, and it does not get enforced during data imports.",,@MAXCHECKED=3,,,,,"[action_tag_help] = 1",,,,,,
+at_maxchoice,action_tags,,checkbox,@MAXCHOICE,"0, None | 1, One | 2, Two | 3, Three","@MAXCHOICE(0=50,1=75,2=50)",,,,,,,,,,," @MAXCHOICE(0=50,1=75,2=50)"
+at_maxchoice_help,action_tags,,descriptive,"@MAXCHOICE: Causes one or more specified choices to be disabled (i.e., displayed but not usable) for a checkbox, radio button, or drop-down field after a specified amount of records have been saved with that choice. For example, @MAXCHOICE(0=50,1=75,2=50) would imply that once 50 records have selected the '0' coded choice, that choice will become disabled for any record viewed afterward that does not have that choice saved, such as when the form/survey is opened for a new record, and thus 75 records for choice '1', 50 for choice '2', etc. The format must be the action tag name followed by the choice designations inside parentheses, in which each will follow the format of ChoiceCode=MaxCount with each choice separated by commas. Note: For longitudinal projects, when counting the number of choices saved for records, it will treat all events as separate, meaning that in the example above, choice '0' can have a max number of 50 selections in EACH event in the project.",,"@MAXCHOICE(0=50,1=75,2=50)",,,,,"[action_tag_help] = 1",,,,,,
+at_nomissing,action_tags,,checkbox,@NOMISSING,"1, 1 | 2, 2 | 3, 3","No little M icon for missing",,,,,,,,,,," @NOMISSING"
+at_nomissing_help,action_tags,,descriptive,"@NOMISSING: Disable 'missing data codes' for a field - If custom codes for specifying missing data have been set up in this project (in the Additional Customizations popup on the Project Setup page), this action tag will disable the missing data code functionality for a given field, thus hiding the 'M' icon next to the field.",,"No little M icon for missing",,,,,"[action_tag_help] = 1",,,,,,
+at_noneoftheabove,action_tags,,checkbox,@NONEOFTHEABOVE,"1, 1 | 2, 2 | 3, 3 | 4, 4 | 9, 9 (none of the above)",@NONEOFTHEABOVE=9,,,,,,,,,,," @NONEOFTHEABOVE=9"
+at_noneoftheabove_help,action_tags,,descriptive,"@NONEOFTHEABOV: Allows for the designation of a checkbox choice to be a 'none of the above' option, thus ensuring that no other choices are checked if that one choice is selected. This means that if that particular option is selected, it will alert the user that all other checked-off choices will be unchecked. And if the 'none of the above' option is already checked when the user checks off another choice, it will automatically uncheck the 'none of the above' option. This action tag makes it possible to have a 'none of the above' option without the risk of users mistakenly having other choices selected at the same time. The format must follow the pattern @NONEOFTHEABOVE=??, in which ?? is the coded value of the 'none of the above' checkbox choice - e.g., @NONEOFTHEABOVE=98. Alternatively, it is possible to set multiple options as a 'none of the above' option at the same time, in which the coded values must be comma delimited inside single or double quotes - e.g., @NONEOFTHEABOVE='45,99'. This is useful for certain situations, such as if you have a 'none of the above' option and also have a 'refuse to answer' option, thus allowing either of those to be the only option that can be selected at a time. NOTE: This action tag can only be utilized by Checkbox fields.",,@NONEOFTHEABOVE=9,,,,,"[action_tag_help] = 1",,,,,,
+at_now,action_tags,,text,"@NOW with DateTime field",,,datetime_mdy,,,,,,,,,," @NOW"
+at_now_help,action_tags,,descriptive,"@NOW with DateTime field: (e.g., 2017-08-01 12:34:56) Loads the current user's date+time into a blank Text field - similar to the @TODAY tag but additionally includes the time portion. If the field has validation, the value will adjust to match the date format. 
+
+NOTE: The time used will be the user's local time, which is derived from their device/computer and might be different from the server if in another timezone. Also, do not use this tag on fields with branching logic because it will always prompt the user to erase the value, so look at using @HIDDEN instead if you wish to hide the field.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_now_server,action_tags,,text,"@NOW-SERVER with DateTime",,,datetime_mdy,,,,,,,,,," @NOW-SERVER"
+at_now_server_help,action_tags,,descriptive,"@NOW-SERVER with DateTim: (e.g., 2017-08-01 12:34:56) Loads the REDCap server's date+time into a blank Text field - similar to the @TODAY tag but additionally includes the time portion. If the field has validation, the value will adjust to match the date format. 
+
+NOTE: The time used will be the REDCap server's local time, which might be different from the user's local time if in another timezone. Also, do not use this tag on fields with branching logic because it will always prompt the user to erase the value, so look at using @HIDDEN instead if you wish to hide the field.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_now_utc,action_tags,,text,"@NOW-UTC with Datetime with seconds",,,datetime_seconds_mdy,,,,,,,,,," @NOW-UTC"
+at_now_utc_help,action_tags,,descriptive,"@NOW-UTC with Datetime with seconds: e.g., 2017-08-01 12:34:56) Loads the current UTC/GMT date+time into a blank Text field - similar to the @TODAY tag but additionally includes the time portion. If the field has validation, the value will adjust to match the date format. 
+
+NOTE: The time used will be the current UTC/GMT time, which might be different from the user's local time if in another timezone. Also, do not use this tag on fields with branching logic because it will always prompt the user to erase the value, so look at using @HIDDEN instead if you wish to hide the field.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_passwordmask,action_tags,,text,@PASSWORDMASK,,,,,,,,,,,,," @DEFAULT=""Secret"" @PASSWORDMASK"
+at_passwordmask_help,action_tags,,descriptive,"@PASSWORDMASK: Masks the value of a Text field so that the true value is not visible on the webpage after it has been entered (like password fields on login pages)",,,,,,,"[action_tag_help] = 1",,,,,,
+at_placeholder,action_tags,,text,@PLACEHOLDER,,"@PLACEHOLDER=""This Goes Away""",,,,,,,,,,," @PLACEHOLDER=""This Goes Away"""
+at_placeholder_help,action_tags,,descriptive,"@PLACEHOLDER: Is used to specify a short hint that describes the expected value of a Text field or Notes field (e.g. a sample value or a short description of the expected format). The placeholder is displayed inside the field before a value is entered. The format must follow the pattern @PLACEHOLDER='????', in which the text to be displayed should be inside single or double quotes.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_randomorder,action_tags,,radio,@RANDOMORDER,"1, 1 | 2, 2 | 3, 3 | 4, 4 | 5, 5 | 6, 6 | 7, 7 | 8, 8 | 9, 9 | 10, 10",,,,,,,,,,,," @RANDOMORDER"
+at_randomorder_help,action_tags,,descriptive,"@RANDOMORDER: Randomizes the order of multiple choice field options as displayed on survey pages and data entry forms, in which their order will always be different each time the page is loaded by any given user. 
+
+NOTE: This action tag can only be utilized for the following field types: Checkbox, Radio, Drop-down, Yes-No, and True-False. This tag also works for enhanced radios and checkboxes on surveys. However, this tag does *not* work for a matrix of fields.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_readonly,action_tags,"Read Only",text,@READONLY,,,,,,,,,,,,," @DEFAULT @READONLY=""Sample"""
+at_readonly_help,action_tags,,descriptive,"@READONLY: Makes the field read-only (i.e., disabled) on the survey page, the data entry form, and in the REDCap mobile app so that its value cannot be changed.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_readonly_app,action_tags,,text,@READONLY-APP,,,,,,,,,,,,," @READONLY-APP @READONLY=""Sample"""
+at_readonly_app_help,action_tags,,descriptive,"@READONLY-APP: Makes the field read-only (i.e., disabled) on the form ONLY on the REDCap Mobile App so that its value cannot be changed.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_readonly_form,action_tags,,text,@READONLY-FORM,,,,,,,,,,,,," @READONLY-FORM @READONLY=""Sample"""
+at_readonly_form_help,action_tags,,descriptive,"@READONLY-FORM: Makes the field read-only (i.e., disabled) only on the data entry form (i.e., not on the survey page or mobile app) so that its value cannot be changed.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_readonly_survey,action_tags,,text,@READONLY-SURVEY,,,,,,,,,,,,," @READONLY-SURVEY @READONLY=""Sample"""
+at_readonly_survey_help,action_tags,,descriptive,"@READONLY-SURVEY: Makes the field read-only (i.e., disabled) only on the survey page (i.e., not on the data entry form or mobile app) so that its value cannot be changed.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_setvalue,action_tags,,text,@SETVALUE,"1, @SETVALUE='2007-12-25'",@SETVALUE='2007-12-25',,,,,,,RH,,,," @SETVALUE='2007-12-25'"
+at_setvalue_help,action_tags,,descriptive,"@SETVALUE:  Sets a field's value to static text or dynamic/piped text whenever a data entry form or survey page is loaded, in which it will always overwrite an existing value of the field. The format must follow the pattern @SETVALUE=""????"", in which the desired value should be inside single or double quotes. For text fields, you may pipe and concatenate values from other fields in the project - e.g., @SETVALUE='Name: [first_name] [last_name], DOB: [dob]'. For checkbox fields, simply separate multiple checkbox values with commas - e.g., @SETVALUE='1,3,[other_field:value]'. NOTE: The piped value does *not* get applied during any data imports (via API or Data Import Tool) but only operates when viewing survey pages and data entry forms. NOTE: A field with @SETVALUE will have its value updated ONLY when the page loads, which means that its value will not be updated in real-time if you modify other fields on the same page that are piped into the @SETVALUE tag. NOTE: If being used on a date or datetime field, the date value inside the quotes must be in Y-M-D format - e.g., @SETVALUE='2007-12-25' - regardless of the field's set date format. NOTE: The only difference between @SETVALUE and @DEFAULT is that @DEFAULT is only applied when an instrument has no data yet, whereas @SETVALUE will always be applied on an instrument, meaning that @SETVALUE will ALWAYS overwrite the value if a field value already exists. TIP: To pipe the value of one multiple choice field into another multiple choice field, make sure you append ':value' to the variable being piped - e.g., @SETVALUE='[my_dropdown:value]'. (In earlier versions of REDCap, the @SETVALUE action tag went by the name @PREFILL, which still works equivalently to @SETVALUE for backward compatibility purposes.)",,,,,,,"[action_tag_help] = 1",,,,,,
+at_sync_app,action_tags,,file,@SYNC-APP,,,,,,,,,,,,," @SYNC-APP"
+at_sync_app_help,action_tags,,descriptive,"@SYNC-APP: Can be used only for File Upload and Signature fields. If the project is initialized in the REDCap Mobile App, this will cause any image files uploaded to a record to be sent to the app so that they are viewable in the app when editing the record. 
+
+NOTE: For use only in the REDCap Mobile App.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_today,action_tags,,text,@TODAY,,,date_mdy,,,,,,,,,," @TODAY"
+at_today_help,action_tags,,descriptive,"@TODAY: e.g., 2017-08-01) Loads the REDCap server's date into a blank Text field - similar to the @NOW tag but without the time portion. If the field has validation, the value will adjust to match the date format. Also, do not use this tag on fields with branching logic because it will always prompt the user to erase the value, so look at using @HIDDEN instead if you wish to hide the field.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_today_server,action_tags,,text,@TODAY-SERVER,,,,,,,,,,,,," @TODAY-SERVER"
+at_today_server_help,action_tags,,descriptive,"@TODAY-SERVER: e.g., 2017-08-01) Loads the current UTC/GMT date into a blank Text field - similar to the @NOW tag but without the time portion. If the field has validation, the value will adjust to match the date format. Also, do not use this tag on fields with branching logic because it will always prompt the user to erase the value, so look at using @HIDDEN instead if you wish to hide the field.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_today_utc,action_tags,,text,@TODAY-UTC,,,,,,,,,,,,," @TODAY-UTC"
+at_today_utc_help,action_tags,,descriptive,"@TODAY-UTC: Sets a field's value to the username of the current REDCap user. If this is used on a survey, the value will be '[survey respondent]'. Once the value is captured, it will not be changed when visiting the page at a later time.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_username,action_tags,,text,@USERNAME,,,,,,,,,,,,," @USERNAME"
+at_username_help,action_tags,,descriptive,"@USERNAME: Sets a field's value to the username of the current REDCap user. If this is used on a survey, the value will be '[survey respondent]'. Once the value is captured, it will not be changed when visiting the page at a later time.",,,,,,,"[action_tag_help] = 1",,,,,,
+at_wordlimit,action_tags,,text,@WORDLIMIT,,@WORDLIMIT=3,,,,,,,,,,," @DEFAULT=""two words"" @WORDLIMIT=3"
+at_wordlimit_help,action_tags,,descriptive,"@WORDLIMIT: Sets the maximum number of words that can be entered into a Text field or Notes field, and also displays the number of words remaining. The format must follow the pattern @WORDLIMIT=??, in which ?? is the desired max word count (alternatively, the number value can be inside single or double quotes). NOTE: This action tag cannot be used at the same time as @CHARLIMIT for the same field. 
+
+NOTE: This action tag does *not* get applied during any data imports (via API or Data Import Tool) but only operates when viewing survey pages and data entry forms.",,@WORDLIMIT=3,,,,,"[action_tag_help] = 1",,,,,,
+calc_directions,calculated_fields,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Confirm that calculations are working properly.</p>",,,,,,,,,,,,,
+open_text,calculated_fields,,text,"This is a non validated text field",,,,,,,,,,,,,
+calc_with_defaults_pass,calculated_fields,,descriptive,"<p style=""text-align:center; padding:20px;background-color:green;color:white;"">Default Calculations Pass</p>
+",,,,,,,"[open_range_integer]  = 4 and
+[int_0_to_100]  = 2 and
+[addition_two_ints]  = 6 and
+[subtract_two_ints]  = 2 and
+[multiply_two_ints]  = 8 and
+[divide_two_ints]  = 2 and
+[open_range_integer_sqrt]  = 2 and
+[open_range_integer_exp]  = 16 and
+[absolute_value]  = 4 and
+[min_value]  = 1 and
+[max_value]  = 10 and
+round([mean_value],3)  = 5.154 and
+[median_value]  = 4 and
+[sum_with_blank]  = 55 and
+round([calc_stdev],2)  = 2.70 and
+[calc_log]  = 2 and
+[calc_isnumber]  = 1 and
+[zero]  = 0 and
+[div_by_zero]  = """" and
+[open_number]  = 1111.11 and
+[number_0_to_100]  = 22.22 and
+[calc_isinteger]  = 0 and
+[number_sum]  = 1133.33 and
+[d1]  = 1.1 and
+[d2]  = 2.12 and
+[add_two_decimals]  = 3.22 and
+[d4]  = 4.1234 and
+[d4_round]  = 4 and
+[d4_round_up]  = 5 and
+[d4_round_down]  = 4 and
+[date_diff_days]  = 0 and
+[date_diff_months]  = 0 and
+[date_diff_years]  = 0 and
+[date_diff_two_dates]  = 0 and
+[time_diff_hours]  = 0 and
+[time_diff_minutes]  = 0 and
+[time_diff_seconds]  = 0 and
+[choice_1_to_5]  = 5 and
+[choice_1_to_10]  = 10 and
+[if_choice_eq_1]  = 5 and
+[if_two_fields]  = 15 and
+[slilder1]  = 45",,,,,,
+calc_with_defaults_fail,calculated_fields,,descriptive,"<p style=""text-align:center; padding:20px;background-color:white;color:red;"">Default Tests Fail</p>
+<p style=""text-align:left;""><em>When the form first loads, defaults values are used in the calculations.  These values will result in the same calculated values 99% of the time.  Because dates values are calculated, coming back to this form on another date will result in the auto-calculations being off.  When this happens, delete the saved form and reload the instrument.  That will update the date fields with today's values and the calculations will be correct.  If they are not, it is something to look into.  You may change any value on this form, however this warning will appear and you will have to verify the results.</em>",,,,,,,"(datediff([date_no_min_max], 'today', 'd') <> 0) or 
+(datediff([date2], 'today', 'd') <> 0) or
+[open_range_integer] <> 4 or
+[int_0_to_100]  <> 2 or
+[addition_two_ints]  <> 6 or
+[subtract_two_ints]  <> 2 or
+[multiply_two_ints]  <> 8 or
+[divide_two_ints]  <> 2 or
+[open_range_integer_sqrt]  <> 2 or
+[open_range_integer_exp]  <> 16 or
+[absolute_value]  <> 4 or
+[min_value]  <> 1 or
+[max_value]  <> 10 or
+round([mean_value],3)  <> 5.154 or
+[median_value]  <> 4 or
+[sum_with_blank]  <> 55 or
+round([calc_stdev],2)  <> 2.70 or
+[calc_log]  <> 2 or
+[calc_isnumber]  <> 1 or
+[zero]  <> 0 or
+[div_by_zero]  <> """" or
+[open_number]  <> 1111.11 or
+[number_0_to_100]  <> 22.22 or
+[calc_isinteger]  <> 0 or
+[number_sum]  <> 1133.33 or
+[d1]  <> 1.1 or
+[d2]  <> 2.12 or
+[add_two_decimals]  <> 3.22 or
+[d4]  <> 4.1234 or
+[d4_round]  <> 4 or
+[d4_round_up]  <> 5 or
+[d4_round_down]  <> 4 or
+[date_diff_days]  <> 0 or
+[date_diff_months]  <> 0 or
+[date_diff_years]  <> 0 or
+[date_diff_two_dates]  <> 0 or
+[time_diff_hours]  <> 0 or
+[time_diff_minutes]  <> 0 or
+[time_diff_seconds]  <> 0 or
+[choice_1_to_5]  <> 5 or
+[choice_1_to_10]  <> 10 or
+[if_choice_eq_1]  <> 5 or
+[if_two_fields]  <> 15 or
+[slilder1]  <> 45",,,,,,
+calc_with_defaults_fail_2,calculated_fields,,descriptive,"<p style=""text-align:center; padding:20px;background-color:white;color:red;"">Note that the date for date_no_min_max :[date_no_min_max] is NOT today.  Pass/Fail is only valid on the day this data entry form is created.  The date calculations will be off the following day and report a false negative.  If you see a Pass Fail, check that the default date values are for today.  Update any past dates to today and see if the test result changes.</p>",,,,,,,"(datediff([date_no_min_max], 'today', 'd') <> 0) or 
+(datediff([date2], 'today', 'd') <> 0)",,,,,,
+open_range_integer,calculated_fields,Numbers,text,"Integer 1
+Integer Validated Field ( No range)
+Default value is 4",,,integer,,,,,,,,,," @DEFAULT=""4"""
+int_0_to_100,calculated_fields,,text,"Integer 2
+0 to 100 Validated field",,,integer,0,100,,,,,,,," @DEFAULT=""2"""
+addition_two_ints,calculated_fields,,calc,"Integer 1 + Integer 2
+Correct value is 6","[int_0_to_100] + [open_range_integer]",,,,,,,,,,,,
+subtract_two_ints,calculated_fields,,calc,"Integer 1 - Integer 2
+Correct value is 2","[open_range_integer] - [int_0_to_100]",,,,,,,,,,,,
+multiply_two_ints,calculated_fields,,calc,"Integer 1 * Integer 2
+Correct value is 8","[open_range_integer] * [int_0_to_100]",,,,,,,,,,,,
+divide_two_ints,calculated_fields,,calc,"Integer 1 / Integer 2
+Correct value is 2","[open_range_integer] / [int_0_to_100]",,,,,,,,,,,,
+open_range_integer_sqrt,calculated_fields,,calc,"Square root of Integer 1
+Correct value is 2",sqrt([open_range_integer]),,,,,,,,,,,,
+open_range_integer_exp,calculated_fields,,calc,"Integer 1 ^ Integer 2
+Correct value is 16","([open_range_integer]) ^ ([int_0_to_100])",,,,,,,,,,,,
+absolute_value,calculated_fields,,calc,"Absolute value Integer 1
+Correct value is 4",abs([open_range_integer]),,,,,,,,,,,,
+min_value,calculated_fields,,calc,"Min Value of 1,2,3,4,5,6,7,8,9,10
+Correct value is 1","min(1,2,3,4,5,6,7,8,9,10)",,,,,,,,,,,,
+max_value,calculated_fields,,calc,"Max Value of 1,2,3,4,5,6,7,8,9,10
+Correct value is 10","max(1,2,3,4,5,6,7,8,9,10)",,,,,,,,,,,,
+mean_value,calculated_fields,,calc,"Mean Value of 1,2,3,4,4,4,4,5,6,7,8,9,10
+Correct value is 5.154
+","mean(1,2,3,4,4,4,4,5,6,7,8,9,10)",,,,,,,,,,,,
+median_value,calculated_fields,,calc,"Median Value of 1,2,3,4,4,4,4,5,6,7,8,9,10
+Correct value is 4","median(1,2,3,4,4,4,4,5,6,7,8,9,10)",,,,,,,,,,,,
+sum_with_blank,calculated_fields,,calc,"Sum of blank, 1,2,3,4,5,6,7,8,9,10
+Correct value is 55","sum("""",1,2,3,4,5,6,7,8,9,10)",,,,,,,,,,,,
+calc_stdev,calculated_fields,,calc,"Standard Deviation of 1,2,3,4,5,6,7,8,9,10
+Correct value is 2.70","stdev(1,2,3,4,4,4,4,5,6,7,8,9,10)",,,,,,,,,,,,
+calc_log,calculated_fields,,calc,"Log (Integer 1, Integer2)
+log (number, base)
+Correct value is 2","log([open_range_integer],[int_0_to_100])",,,,,,,,,,,,
+calc_isnumber,calculated_fields,,calc,"Is Number (Integer 1)
+Correct value is 1","if(isnumber([open_range_integer]),1,0)",,,,,,,,,,,,
+zero,calculated_fields,,text,Zero,,,,,,,,,,,,," @NOMISSING @DEFAULT=0"
+div_by_zero,calculated_fields,,calc,"Division by 0... 
+
+([open_range_integer] / [zero])","[open_range_integer] / [zero]",,,,,,,,,,,,
+open_number,calculated_fields,,text,"Number Field
+DEFAULT=""1111.11""",,,number,,,,,,,,,," @DEFAULT=""1111.11"""
+number_0_to_100,calculated_fields,,text,"Number from 0 to 100
+DEFAULT=""22.22""",,,number,0,100,,,,,,,," @DEFAULT=""22.22"""
+calc_isinteger,calculated_fields,,calc,"Is Integer (Number Field)
+Correct value is 0","if(isinteger([open_number]),1,0)",,,,,,,,,,,,
+number_sum,calculated_fields,,calc,"Sum of numbers rounded to 2 decimals
+Correct value is 1133.33","round(sum([open_number], [number_0_to_100]),2)",,,,,,,,,,,,
+d1,calculated_fields,,text,"One Decimal
+DEFAULT=""1.1""",,,number_1dp,,,,,,,,,," @DEFAULT=""1.1"""
+d2,calculated_fields,,text,"Two Decimals
+DEFAULT=""2.12""",,,number_2dp,,,,,,,,,," @DEFAULT=""2.12"""
+add_two_decimals,calculated_fields,,calc,"One Decimal + Two Decimals
+Correct value is ""3.22""","[d1] + [d2]",,,,,,,,,,,,
+d4,calculated_fields,,text,"Four Decimals
+DEFAULT=""4.1234""",,,number_4dp,,,,,,,,,," @DEFAULT=""4.1234"""
+d4_round,calculated_fields,,calc,"Round four decimals
+Correct value is 4",round([d4]),,,,,,,,,,,,
+d4_round_up,calculated_fields,,calc,"Four decimals Round UP 
+Correct value is 5",roundup([d4]),,,,,,,,,,,,
+d4_round_down,calculated_fields,,calc,"Four decimals Round DOWN
+Correct value is 4",rounddown([d4]),,,,,,,,,,,,
+date_no_min_max,calculated_fields,Dates,text,"Date 1 (No minimum or maximum)
+Defaults to today.",,,date_mdy,,,,,,,,,," @TODAY"
+date2,calculated_fields,,text,"Date 2 (has minimum or maximum)
+@TODAY",,"01/01/2000 thru 01/01/2035",date_mdy,2000-01-01,2035-01-01,,,,,,,," @TODAY"
+date_diff_days,calculated_fields,,calc,"Date difference from TODAY in days.
+Uses Date 1
+Correct value is 0 on the day it is first saved","datediff([date_no_min_max],""today"",""d"")",,,,,,,,,,,,
+date_diff_months,calculated_fields,,calc,"Date difference from TODAY in months.
+Uses Date 1
+Correct value is 0 on the day it is first saved","datediff([date_no_min_max],""today"",""M"")",,,,,,,,,,,,
+date_diff_years,calculated_fields,,calc,"Date difference from TODAY in years.
+Uses Date 1
+Correct value is 0 on the day it is first saved","datediff([date_no_min_max],""today"",""y"")",,,,,,,,,,,,
+date_diff_two_dates,calculated_fields,,calc,"Difference in date 1 and date 2 in DAYS
+Correct value is 0","datediff([date_no_min_max],[date2],""d"")",,,,,,,,,,,,
+time1,calculated_fields,"Time Calculations",text,"Time 1
+(Now)",,,time,,,,,,,,,," @NOW"
+time2,calculated_fields,,text,"Time 2
+(Now)",,,time,,,,,,,,,," @NOW"
+time_diff_hours,calculated_fields,,calc,"Time 2 - Time 1 in HOURS
+Correct value is 0","datediff([time1],[time2],""h"", true)",,,,,,,,,,,,
+time_diff_minutes,calculated_fields,,calc,"Time 2 - Time 1 in MINUTES
+Correct value is 0","datediff([time1],[time2],""m"", true)",,,,,,,,,,,,
+time_diff_seconds,calculated_fields,,calc,"Time 2 - Time 1 in SECONDS
+Correct value is 0","datediff([time1],[time2],""s"", true)",,,,,,,,,,,,
+choice_1_to_5,calculated_fields,"Multiple choice",dropdown,"Multiple Choice 1-5
+Default is 5","1, 1 | 2, 2 | 3, 3 | 4, 4 | 5, 5",,autocomplete,,,,,,,,,," @DEFAULT=""5"""
+choice_1_to_10,calculated_fields,,dropdown,"Multiple Choice 1-10
+Default is 10","1, 1 | 2, 2 | 3, 3 | 4, 4 | 5, 5 | 5.5, 5.5 | 6, 6 | 7, 7 | 8.8, 8.8 | 9, 9 | 10, 10",,autocomplete,,,,,,,,,," @DEFAULT=""10"""
+if_choice_eq_1,calculated_fields,,calc,"If (Multiple Choice 1-5 = 5 ) then =5 else =0
+Correct value is 5","if ([choice_1_to_5] ===5, 5, 0)",,,,,,,,,,,,
+if_two_fields,calculated_fields,,calc,"If (""Multiple Choice 1-5""  eq 5 ) and  if (""Multiple Choice 1-10""  = 10 ) 
+
+then = 15.  Everything else = 0
+
+Possible answers: 0, 15
+Correct value is 15","sum(if( [choice_1_to_5]= 5, 5, 0), if( [choice_1_to_10]=10, 10, 0))",,,,,,,,,,,,
+slilder1,calculated_fields,,slider,"Slider 0 to 100",,,number,,,,,,RH,,,," @DEFAULT=""45"""
+sql_uuid,calculated_fields,SQL,sql,"UUID sql generated","select ""1"", UUID()",,,,,,,,,,,," @READONLY @DEFAULT=""1"""
+basic_skip_direcitons,basic_skip_patterns,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Toggle a couple of choices below and confirm that skip patterns show and hide fields accordingly.</p>",,,,,,,,,,,,,
+trigger1_skip,basic_skip_patterns,,radio,"Trigger Field 1","1, Show first skipped field | 2, Skip fields 1,2,3,4",,,,,,,,,,,," @DEFAULT=""2"""
+never_skip,basic_skip_patterns,,radio,"Always Visible. 1","1, 1: No Effect | 2, 2: No Effect",,,,,,,,LV,,,,
+skip_field_1,basic_skip_patterns,,radio,"<span style=""padding-left:20px;"">Skip field 1</span>","1, Show field 2 | 2, Hide field 2",,,,,,"[trigger1_skip] = 1",,RH,,,,
+skip_field_2,basic_skip_patterns,,radio,"<span style=""padding-left:40px;"">Skip field 2</span>","1, Show field 3 | 2, Hide field 3",,,,,,"[skip_field_1] = 1 and [trigger1_skip] = 1",,RH,,,,
+skip_field_3,basic_skip_patterns,,radio,"<span style=""padding-left:60px;"">Skip field 3</span>","1, Show field 4 | 2, Hide field 4",,,,,,"[skip_field_2] = 1 and [trigger1_skip] = 1",,RH,,,,
+skip_field_4,basic_skip_patterns,,radio,"<span style=""padding-left:80px;"">Skip field 4</span>","1, 1: No Effect | 2, 2: No Effect",,,,,,"[skip_field_3] = 1 and [trigger1_skip] = 1",,RH,,,,
+never_skip_end,basic_skip_patterns,,radio,"Always visible 2","1, 1: No Effect | 2, 2: No Effect",,,,,,,,LV,,,,
+skip_trigger_checkbox,basic_skip_patterns,,checkbox,"Trigger field for checkbox
+(When checked the field will hidden)","alpha, Skip Alpha | beta, Skip Beta | zeta, Skip Zeta",,,,,,,,,,,,
+never_skip_start_check,basic_skip_patterns,,text,"Always visible 3",,,,,,,,,RH,,,,
+skip_field_alpha,basic_skip_patterns,,text,"<span style=""padding-left:20px;"">Skip Field Alpha</span>",,,,,,,"[skip_trigger_checkbox(alpha)] = '0'",,RH,,,,
+skip_field_beta,basic_skip_patterns,,text,"<span style=""padding-left:20px;"">Skip Field Beta</span>",,,,,,,"[skip_trigger_checkbox(beta)] = '0'",,RH,,,,
+skip_field_zeta,basic_skip_patterns,,text,"<span style=""padding-left:20px;"">Skip Field Zeta</span>",,,,,,,"[skip_trigger_checkbox(zeta)] = '0'",,RH,,,,
+checkbox_visible_end,basic_skip_patterns,,text,"Always Visible 4",,,,,,,,,RH,,,,
+same_timepoint_skips,basic_skip_patterns,,radio,"Same Timepoint Skips","1, To Be Continued | 2, Coming soon.",,,,,,,,,,,,
+embedded_directions,embedded_fields,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Confirm that all 15 embedded fields below are visible and operational.</p>",,,,,,,,,,,,,
+main_embedded_field,embedded_fields,,descriptive,"<div style=""border: 3px solid #22527b; border-radius: 5px; padding:15px;"">
+1) text_box_embedded {text_box_embedded}<hr>
+2) notes_box_embedded {notes_box_embedded}<hr>
+3) calculated_field_embedded {calculated_field_embedded}<hr>
+4) dropdown_embedded {dropdown_embedded}<hr>
+5) radio_single_answer_embedded {radio_single_answer_embedded}<hr>
+6) check_box_embedded {check_box_embedded}<hr>
+7) yes_no_embedded {yes_no_embedded}<hr>
+8) true_false_embedded {true_false_embedded}<hr>
+9) signature_embedded {signature_embedded}<hr>
+10) file_upload_embedded {file_upload_embedded}<hr>
+11) slider_embedded {slider_embedded}<hr>
+12) descriptive_embedded {descriptive_embedded}<hr>
+13) matrix_field_a_embedded {matrix_field_a_embedded}<hr>
+14) matrix_field_b_embedded {matrix_field_b_embedded}<hr>
+15) descriptive_youtube_video {descriptive_youtube_video}
+</div>",,,,,,,,,,,,,
+text_box_embedded,embedded_fields,,text,"Text Box",,,,,,,,,,,,,
+dropdown_embedded,embedded_fields,,dropdown,dropdown_embedded,"1, This is embedded | 2, Hello world",,,,,,,,,,,,
+calculated_field_embedded,embedded_fields,,calc,"calculated_field_embedded
+
+sum(1,2,3,4,5,6,7,8,9,10)","sum(1,2,3,4,5,6,7,8,9,10)",,,,,,,,,,,,
+radio_single_answer_embedded,embedded_fields,,radio,radio_single_answer_embedded,"1, True",,,,,,,,,,,,
+notes_box_embedded,embedded_fields,,notes,"Notes Box",,,,,,,,,,,,,
+check_box_embedded,embedded_fields,,checkbox,"Check Box Multiple Answers","1, yes | 0, no",,,,,,,,,,,,
+yes_no_embedded,embedded_fields,,yesno,"Yes No",,,,,,,,,,,,,
+true_false_embedded,embedded_fields,,truefalse,"True False",,,,,,,,,,,,,
+signature_embedded,embedded_fields,,file,signature,,,signature,,,,,,,,,,
+file_upload_embedded,embedded_fields,,file,"File Upload",,,,,,,,,,,,,
+slider_embedded,embedded_fields,,slider,"Slider Analog","1 | 3 | 5",,,,,,,,RH,,,,
+descriptive_embedded,embedded_fields,,descriptive,"This is a descriptive field label. ",,,,,,,,,,,,,
+descriptive_youtube_video,embedded_fields,,descriptive,"Descript youtube video
+
+https://youtube.com/watch?v=E1cCuWMupz0",,,,,,,,,,,,,
+matrix_field_a_embedded,embedded_fields,"Matrices are field types too. ",radio,"Field A in a Matrix","1, Yes | 0, No | 9, Not applicable",,,,,,,,,,embedded_checkbox_matrix,,
+matrix_field_b_embedded,embedded_fields,,radio,"Field B in a Matrix","1, Yes | 0, No | 9, Not applicable",,,,,,,,,,embedded_checkbox_matrix,,
+smart_var_directions,smart_variables,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Listed below are all available Smart Variables. The default values are smart variables. Confirm the value for each smart variables.</p>",,,,,,,,,,,,,
+smart_vars_url_warning,smart_variables,,descriptive,"<span style=""color:red;"">Since URL to this REDCap does not match the instance URL there are two options:
+1) Export this project as XML and import it on the server you are testing and then test smart variables
+2) Export this instrument as a zip file and import it into the REDCap you are testing.</span>",,,,,,,"[local_equals_remote] = 0",,,,,,
+smart_var_msg,smart_variables,,descriptive,"NOTE: Some smart variable fields are blank that more likely should have a default value on a data entry form.",,,,,,,"[user_name] = """" or
+[user_fullname] = """" or
+[user_email] = """" or
+[user_dag_name] = """" or
+[user_dag_id] = """" or
+[user_dag_label] = """" or
+[user_role_id] = """" or
+[user_role_name] = """" or
+[user_role_label] = """" or
+[record_name] = """" or
+[is_form] = """" or
+[form_url_instrument] = """" or
+[form_link_instrument_custom_text] = """" or
+[instrument_name] = """" or
+[instrument_label] = """" or
+[is_survey] = """" or
+[smart_event_id] = """" or
+[event_number] = """" or
+[event_name] = """" or
+[event_label] = """" or
+[previous_event_name] = """" or
+[previous_event_label] = """" or
+[first_event_name] = """" or
+[first_event_label] = """" or
+[last_event_name] = """" or
+[last_event_label] = """" or
+[arm_number] = """" or
+[arm_label] = """" or
+[first_instance] = """" or 
+[last_instance] = """" or 
+[aggregate_min] = """" or
+[aggregate_max] = """" or
+[aggregate_mean] = """" or
+[aggregate_median] = """" or
+[aggregate_sum] = """" or
+[aggregate_count] = """" or
+[aggregate_unique] = """" or
+[project_id] = """" or
+[redcap_base_url] = """" or
+[redcap_version] = """" or
+[redcap_version_url] = """"",,,,,,
+user_name,smart_variables,User,text,"The current user's REDCap username.",,&lsqb;user-name],,,,,,,RH,,,," @DEFAULT=""[user-name]"""
+user_fullname,smart_variables,,text,"The current user's first and last name (as listed on their My Profile page).",,&lsqb;user-fullname],,,,,,,,,,," @DEFAULT=""[user-fullname]"""
+user_email,smart_variables,,text,"The current user's primary email address (as listed on their My Profile page).",,&lsqb;user-email],,,,,,,,,,," @DEFAULT=""[user-email]"""
+user_dag_name,smart_variables,,text,"The Data Access Group (the unique group name) to which the current user belongs (blank if not in a DAG).",,&lsqb;user-dag-name],,,,,,,,,,," @DEFAULT=""[user-dag-name]"""
+user_dag_id,smart_variables,,text,"The group ID number of the Data Access Group to which the current user belongs (blank if not in a DAG).",,&lsqb;user-dag-id],,,,,,,,,,," @DEFAULT=""[user-dag-id]"""
+user_dag_label,smart_variables,,text,"The name/label of the Data Access Group to which the current user belongs (blank if not in a DAG).",,&lsqb;user-dag-label],,,,,,,,,,," @DEFAULT=""[user-dag-label]"""
+user_role_id,smart_variables,,text,"The Role ID of the user role to which the current user is assigned (blank if not assigned to any user role). This value is auto-generated for each user role. NOTE: This value is not just unique for all roles within the project but is also unique across all REDCap projects. Thus, if the project and its user roles are copied, the Role IDs of the user roles in the resulting copy will be different from the ones in the original project.",,"[ user_role_id ]",,,,,,,,,,," @DEFAULT=""[user-role-id]"""
+user_role_name,smart_variables,,text,"The unique role name of the user role to which the current user is assigned (blank if not assigned to any user role). This value is auto-generated for each user role. NOTE: This value is only unique for roles within the project. Thus, if the project and its roles are copied, the new project will retain the same unique role names, which allows you to utilize the unique role names in conditional logic, calculations, branching logic, etc. that will not break when the project is copied.",,"[ user-role-name ]	",,,,,,,,,,," @DEFAULT=""[user-role-name]"""
+user_role_label,smart_variables,,text,"The name/label of the user role to which the current user is assigned (blank if not assigned to any user role). This value is defined by the user that creates the user role.",,"[ user-role-label ]",,,,,,,,,,," @DEFAULT=""[user-role-label]"""
+record_name,smart_variables,Record,text,"The record name of the current record.",,&lsqb;record-name],,,,,,,,,,," @DEFAULT=""[record-name]"""
+record_dag_name,smart_variables,,text,"The Data Access Group (the unique group name) to which the current record belongs (blank if not in a DAG).",,&lsqb;record-dag-name],,,,,,,,,,," @DEFAULT=""[record-dag-name]"""
+record_dag_id,smart_variables,,text,"The group ID number of the Data Access Group to which the current record belongs (blank if not in a DAG).",,&lsqb;record-dag-id],,,,,,,,,,," @DEFAULT=""[record-dag-id]"""
+record_dag_label,smart_variables,,text,"The name/label of the Data Access Group to which the current record belongs (blank if not in a DAG).",,"&lsqb;record-dag-label]	",,,,,,,,,,," @DEFAULT=""[record-dag-label]"""
+is_form,smart_variables,Form,text,"Detects if the current instrument is being viewed as a data entry form (returns 1 for True, 0 for False), as opposed to a survey.",,&lsqb;is-form],,,,,,,,,,," @DEFAULT=""[is-form]"""
+form_url_instrument,smart_variables,,notes,"The web address (URL) of the specified data entry form for the current record/event/instance. The format must be &lsqb;form-url:instrument], in which 'instrument' is the unique form name of the desired instrument.",,&lsqb;form-url:instrument],,,,,,,,,,," @DEFAULT=""[form-url:instrument]"""
+form_link_instrument_custom_text,smart_variables,,notes,"The HTML web link that, when clicked, will navigate to the specified data entry form for the current record/event/instance. The format must be &lsqb;form-link:instrument] or &lsqb;form-link:instrument:Custom Text], in which 'instrument' is the unique form name of the desired instrument. 'Custom Text' is an optional parameter whereby you can specify the visible link text, and if it is not provided, it defaults to the form label of the data entry form. The format &lsqb;form-link:Custom Text] can also be used if the instrument is assumed, such as when viewing a form or in a survey invitation. Also, it can be used simply as [form-link] inside the content of a survey invitation, in which 'instrument' is assumed to be the current survey instrument.",,"&lsqb;form-link:instrument:Custom Text]",,,,,,,,,,," @DEFAULT=""[form-link:instrument:Custom Text]"""
+instrument_name,smart_variables,,text,"The unique instrument name of the current survey or data entry form. It will return a blank value if not in an instrument context.",,&lsqb;instrument-name],,,,,,,,,,," @DEFAULT=""[instrument-name]"""
+instrument_label,smart_variables,,text,"The instrument label of the current survey or data entry form. It will return a blank value if not in an instrument context.",,&lsqb;instrument-label],,,,,,,,,,," @DEFAULT=""[instrument-label]"""
+is_survey,smart_variables,Survey,text,"Detects if the current instrument is being administered as a survey (returns 1 for True, 0 for False), as opposed to a form.",,&lsqb;is-survey],,,,,,,,,,," @DEFAULT=""[is-survey]"""
+survey_url_instrument,smart_variables,,notes,"The web address (URL) of the specified survey for the current record/event/instance. The format must be &lsqb;survey-url] or &lsqb;survey-url:instrument], in which 'instrument' is the unique form name of the desired instrument. This can be used simply as &lsqb;survey-url] inside the content of a survey invitation, in which 'instrument' is assumed to be the current survey instrument.",,&lsqb;survey-url:instrument],,,,,,,,,,," @DEFAULT=""[survey-url:instrument]"""
+survey_link_instrument_custom_text,smart_variables,,notes,"The HTML web link that, when clicked, will navigate to the specified survey for the current record/event/instance. The format must be &lsqb;survey-link], &lsqb;survey-link:instrument], or &lsqb;survey-link:instrument:Custom Text], in which 'instrument' is the unique form name of the desired instrument. 'Custom Text' is an optional parameter whereby you can specify the visible link text, and if it is not provided, it defaults to the survey title of the survey. The format &lsqb;survey-link:Custom Text] can also be used if the instrument is assumed, such as when viewing a form or in a survey invitation. Also, it can be used simply as [survey-link] inside the content of a survey invitation, in which 'instrument' is assumed to be the current survey instrument.",,"&lsqb;survey-link:instrument:Custom Text]",,,,,,,,,,," @DEFAULT=""[survey-link:instrument:Custom Text]"""
+survey_queue_url,smart_variables,,notes,"The web address (URL) of the survey queue for the current record.",,&lsqb;survey-queue-url],,,,,,,,,,," @DEFAULT=""[survey-queue-url]"""
+survey_queue_link_custom_text,smart_variables,,notes,"The HTML web link that, when clicked, will navigate to the survey queue for the current record. The format must be &lsqb;survey-queue-link] or &lsqb;survey-queue-link:Custom Text], in which 'Custom Text' is an optional parameter whereby you can specify the visible link text. And if it is not provided, it defaults to 'Survey Queue Link'.",,"&lsqb;survey-queue-link:Custom Text]",,,,,,,,,,," @DEFAULT=""[survey-queue-link:Custom Text]"""
+survey_time_completed_instrument,smart_variables,,text,"The date and time on which the specified survey instrument was completed for the current record/event. The format must be &lsqb;survey-time-completed:instrument], in which 'instrument' is the unique form name of the desired instrument. In a piping context, such as in a field label, survey invitation, or inside the @DEFAULT action tag, the format of the date and time will be displayed based on the current user's date/time display preferences. If you wish to have it return the raw value, which will instead be in 'YYYY-MM-DD HH:MM:SS' format and would be more appropriate for conditional logic or calculated fields, simply append ':value'. If the survey has not been completed, it returns a blank value.",,&lsqb;survey-time-completed:instrument],,,,,,,,,,," @DEFAULT=""[survey-time-completed:smart_variables]"""
+survey_date_completed_instrument,smart_variables,,text,"The date on which the specified survey instrument was completed for the current record/event (includes date component only, unlike &lsqb;survey-timestamp]). The format must be &lsqb;survey-date-completed:instrument], in which 'instrument' is the unique form name of the desired instrument. In a piping context, such as in a field label, survey invitation, or inside the @DEFAULT action tag, the format of the date will be displayed based on the current user's date display preferences. If you wish to have it return the raw value, which will instead be in 'YYYY-MM-DD' format and would be more appropriate for conditional logic or calculated fields, simply append ':value'. If the survey has not been completed, it returns a blank value.",,&lsqb;survey-date-completed:instrument],,,,,,,,,,," @DEFAULT=""[survey-date-completed:smart_variables]"""
+survey_title_instrument,smart_variables,,text,"The survey title of the instrument specified by the 'instrument' parameter (if provided). If the 'instrument' parameter is not provided, the current survey instrument will be used, else it will return a blank value if not in an instrument/survey context.",,&lsqb;survey-title:instrument],,,,,,,,,,," @DEFAULT=""[survey-title:instrument]"""
+smart_event_id,smart_variables,"Event & Arm",text,"(longitudinal only) The event id number of the current event.",,"[ event-id ]",,,,,,,,,,," @DEFAULT=""[event-id]"""
+event_number,smart_variables,,text,"(longitudinal only) The current event's ordinal number as listed on the Define My Events page that denotes the order of the event within a given arm.",,"[ event-number ]",,,,,,,,,,," @DEFAULT=""[event-number]"""
+event_name,smart_variables,,text,"(longitudinal only) The current event (unique event name). Note: This can be used as stand-alone or can be prepended to a field variable.",,&lsqb;event-name],,,,,,,,,,," @DEFAULT=""[event-name]"""
+event_label,smart_variables,,text,"(longitudinal only) The current event (the event label, not the unique event name).",,&lsqb;event-label],,,,,,,,,,," @DEFAULT=""[event-label]"""
+previous_event_name,smart_variables,,text,"(longitudinal only) The event (unique event name) that occurs immediately before the current event (blank if current event is the first event). Note: This can be used as stand-alone or can be prepended to a field variable. Important: When using this as a stand-alone variable, it will always return the event that occurs *immediately* before the current event, whereas if it is prepended to another variable, it will instead return the closest previous event for which the field's instrument has been designated, which might be different than the event that occurs directly before the current event. This behavior is due to the fact that the field's instrument might not always be designated for the event that occurs directly before the current event.",,&lsqb;previous-event-name],,,,,,,,,,," @DEFAULT=""[previous-event-name]"""
+previous_event_label,smart_variables,,text,"(longitudinal only) The event (the event label, not the unique event name) that occurs immediately before the current event (blank if current event is the first event).",,&lsqb;previous-event-label],,,,,,,,,,," @DEFAULT=""[previous-event-label]"""
+next_event_name,smart_variables,,text,"(longitudinal only) The event (unique event name) that occurs immediately after the current event (blank if current event is the last event). Note: This can be used as stand-alone or can be prepended to a field variable. Important: When using this as a stand-alone variable, it will always return the event that occurs *immediately* after the current event, whereas if it is prepended to another variable, it will instead return the closest following event for which the field's instrument has been designated, which might be different than the event that occurs directly after the current event. This behavior is due to the fact that the field's instrument might not always be designated for the event that occurs directly after the current event.",,&lsqb;next-event-name],,,,,,,,,,," @DEFAULT=""[next-event-name]"""
+next_event_label,smart_variables,,text,"(longitudinal only) The event (the event label, not the unique event name) that occurs immediately after the current event (blank if current event is the last event).",,"&lsqb;next-event-label]	",,,,,,,,,,," @DEFAULT=""[next-event-label]"""
+first_event_name,smart_variables,,text,"(longitudinal only) The first event (unique event name) for the current arm. Note: This can be used as stand-alone or can be prepended to a field variable. Important: When using this as a stand-alone variable, it will always return the first event for the current arm, whereas if it is prepended to another variable, it will instead return the first event (for the current arm) for which the field's instrument has been designated, which might be different than the very first event. This behavior is due to the fact that the field's instrument might not always be designated for the very first event.",,&lsqb;first-event-name],,,,,,,,,,," @DEFAULT=""[first-event-name]"""
+first_event_label,smart_variables,,text,"(longitudinal only) The first event (the event label, not the unique event name) for the current arm.	",,first-event-label,,,,,,,,,,," @DEFAULT=""[first-event-label]"""
+last_event_name,smart_variables,,text,"(longitudinal only) The last event (unique event name) for the current arm. Note: This can be used as stand-alone or can be prepended to a field variable. Important: When using this as a stand-alone variable, it will always return the last event for the current arm, whereas if it is prepended to another variable, it will instead return the last event (for the current arm) for which the field's instrument has been designated, which might be different than the very last event. This behavior is due to the fact that the field's instrument might not always be designated for the very last event.",,"&lsqb;last-event-name]	",,,,,,,,,,," @DEFAULT=""[last-event-name]"""
+last_event_label,smart_variables,,text,"(longitudinal only) The last event (the event label, not the unique event name) for the current arm.",,&lsqb;last-event-label],,,,,,,,,,," @DEFAULT=""[last-event-label]"""
+arm_number,smart_variables,,text,"(longitudinal only) The current arm number.
+arm-number: [arm-number]",,&lsqb;arm-number],,,,,,,,,,," @DEFAULT=""[arm-number]"""
+arm_label,smart_variables,,text,"(longitudinal only) The arm label text of the current arm.",,&lsqb;arm-label],,,,,,,,,,," @DEFAULT=""[arm-label]"""
+previous_instance,smart_variables,"Repeating Instruments and Events",text,"(repeating instruments/events only) The repeating instance number that occurs immediately before the current instance (e.g., current instance minus 1). 'Instance' refers to the instance of either a repeating instrument or a repeating event. Note: This can be used as stand-alone or can be appended to a field variable.",,&lsqb;previous-instance],,,,,,,,,,," @DEFAULT=""[previous-instance]"""
+current_instance,smart_variables,,text,"(repeating instruments/events only) The repeating instance number of a repeating instrument or a repeating event in the current context. Note: This can be used as stand-alone or can be appended to a field variable.",,&lsqb;current-instance],,,,,,,,,,," @DEFAULT=""[current-instance]"""
+next_instance,smart_variables,,text,"(repeating instruments/events only) The repeating instance number that occurs immediately after the current instance (e.g., current instance plus 1). 'Instance' refers to the instance of either a repeating instrument or a repeating event. Note: This can be used as stand-alone or can be appended to a field variable.
+Next-Instance: [next-instance]",,&lsqb;next-instance],,,,,,,,,,," @DEFAULT=""[next-instance]"""
+first_instance,smart_variables,,text,"(repeating instruments/events only) The first (lowest numbered) repeating instance number for the current record/event context. Note: This can be used as stand-alone or can be appended to a field variable.",,&lsqb;first-instance],,,,,,,,,,," @DEFAULT=""[first-instance]"""
+last_instance,smart_variables,,text,"(repeating instruments/events only) The last (highest numbered) repeating instance number for the current record/event context. Note: This can be used as stand-alone or can be appended to a field variable.",,&lsqb;last-instance],,,,,,,,,,," @DEFAULT=""[last-instance]"""
+aggregate_min,smart_variables,"Aggregate Functions, Charts, and Tables
+(also known as Smart Functions, Smart Charts, and Smart Tables)",text,"The minimum value of a field across all records in the project (including all events and/or repeating instances in all records). Multiple fields may be used and must be comma-separated.",,"[ aggregate-min:fields:parameters ]",,,,,,,,,,," @DEFAULT=""[aggregate-min:open_range_integer]"""
+aggregate_max,smart_variables,,text,"The maximum value of a field across all records in the project (including all events and/or repeating instances in all records). Multiple fields may be used and must be comma-separated.",,"[ aggregate-max:fields:parameters ]",,,,,,,,,,," @DEFAULT=""[aggregate-max:open_range_integer]"""
+aggregate_mean,smart_variables,,text,"The mean/average value of a field across all records in the project (including all events and/or repeating instances in all records). Multiple fields may be used and must be comma-separated.",,"[ aggregate-mean:fields:parameters ]",,,,,,,,,,," @DEFAULT=""[aggregate-mean:open_range_integer]"""
+aggregate_median,smart_variables,,text,"The median value of a field across all records in the project (including all events and/or repeating instances in all records). Multiple fields may be used and must be comma-separated.",,"[ aggregate-median:open_range_integer:parameters ]",,,,,,,,,,," @DEFAULT=""[aggregate-median:open_range_integer]"""
+aggregate_sum,smart_variables,,text,"The sum of all values for a field across all records in the project (including all events and/or repeating instances in all records). Multiple fields may be used and must be comma-separated.",,"[ aggregate-sum:open_range_integer:parameters ]",,,,,,,,,,," @DEFAULT=""[aggregate-sum:open_range_integer]"""
+aggregate_count,smart_variables,,text,"The count of all values for a field across all records in the project (including all events and/or repeating instances in all records). Multiple fields may be used and must be comma-separated.",,"[ aggregate-count:open_range_integer:parameters ]",,,,,,,,,,," @DEFAULT=""[aggregate-count:open_range_integer]"""
+aggregate_stdev,smart_variables,,text,"The standard deviation of a field across all records in the project (including all events and/or repeating instances in all records) Multiple fields may be used and must be comma-separated.
+
+@DEFAULT=""[aggregate-stdev:open_range_integer]""",,"[ aggregate-stdev:open_range_integer:parameters ]",,,,,,,,,,," @DEFAULT=""[aggregate-stdev:open_range_integer:parameters]"""
+aggregate_unique,smart_variables,,text,"The count of unique values (i.e., a count that does not consider duplicate values) of a field across all records in the project (including all events and/or repeating instances in all records). Multiple fields may be used and must be comma-separated.",,"[ aggregate-unique:open_range_integer:parameters ]",,,,,,,,,,," @DEFAULT=""[aggregate-unique:open_range_integer]"""
+scatter_plot_x_axis_field_y_axis_field_grouping,smart_variables," Smart Charts, and Smart Tables",descriptive,"Displays a scatter plot of one number/date/datetime field for the x-axis and a second field (number field only) for the y-axis. (If a second field is not provided, a random value will be assigned for the y-axis.) It can optionally perform color grouping if a third field (multiple choice only) is provided. All fields must be comma-separated.
+
+Smart Variable: scatter-plot:open_range_integer, int_0_to_100
+scatter-plot: [scatter-plot:open_range_integer, int_0_to_100]",,,,,,,,,,,,,
+line_chart_x_axis_field_y_axis_field_grouping,smart_variables,,descriptive,"Displays a line chart of one number/date/datetime field for the x-axis and a second field (number field only) for the y-axis. It can optionally perform color grouping if a third field (multiple choice only) is provided. All fields must be comma-separated. Note: A line chart is essentially the same as a scatter plot except with dots connected with a line.
+
+Smart Variable: line-chart:open_range_integer, int_0_to_100
+line-chart: [line-chart:open_range_integer, int_0_to_100]",,,,,,,,,,,,,
+bar_chart_field_grouping,smart_variables,,descriptive,"Displays a bar chart for a single multiple choice field. It can optionally perform color grouping if a second field (multiple choice only) is provided. The fields must be comma-separated.	
+
+Smart Variable: bar-chart:choice_1_to_10, int_0_to_100
+bar-chart: [bar-chart:choice_1_to_10]",,,,,,,,,,,,,
+pie_chart,smart_variables,,descriptive,"Displays a pie chart for a single multiple choice field.	
+
+Smart Variable: pie-chart:choice_1_to_10
+Pie-chart: [pie-chart:choice_1_to_10]",,,,,,,,,,,,,
+donut_chart,smart_variables,,descriptive,"Displays a donut chart for a single multiple choice field.  Note: A donut chart is essentially the same as a pie chart but with the center removed.	
+
+Smart Variable: donut-chart:choice_1_to_10
+Donut-chart: [donut-chart:choice_1_to_10]",,,,,,,,,,,,,
+stats_table,smart_variables,,descriptive,"Displays a table of descriptive statistics for one or more fields (comma-separated) in which each field is represented as a row in the table. There is no limit to the number of fields that can be used. By default, all columns will be displayed and are as follows: Count, Missing, Unique, Min, Max, Mean, Median, StDev, Sum. To display only a subset of the columns, you may provide any of the following designations (comma-separated) that represent a specific column in the table: count, missing, unique, min, max, mean, median, stdev, sum.	
+
+Smart Variable: stats-table:open_range_integer, int_0_to_100
+Stats-table: [stats-table:open_range_integer, int_0_to_100]",,[stats-table:fields:columns:parameters],,,,,,,,,,,
+project_id,smart_variables,Miscellaneous,text,"The Project ID (i.e., PID) of the current REDCap project.",,&lsqb;project-id],,,,,,,,,,," @DEFAULT=""[project-id]"""
+redcap_base_url,smart_variables,,text,"The base web address for this REDCap installation.",,&lsqb;redcap-base-url],,,,,,,,,,," @DEFAULT=""[redcap-base-url]"""
+redcap_version,smart_variables,,text,"The current REDCap version number of this REDCap installation.",,&lsqb;redcap-version],,,,,,,,,,," @DEFAULT=""[redcap-version]"""
+redcap_version_url,smart_variables,,text,"The base web address of the current REDCap version directory for this REDCap installation.",,&lsqb;redcap-version-url],,,,,,,,,,," @DEFAULT=""[set_up_arm_1][instance_version_url]"""
+survey_base_url,smart_variables,,text,"The base web address for surveys for this REDCap installation.",,&lsqb;survey-base-url],,,,,,,,,,," @DEFAULT=""[survey-base-url]"""
+missing_values_directions,missing_values,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">REDCap projects can define missing values.  This page checks that missing value are available and that user defined missing values are available.
+Visit <a href=""[set_up_arm_1][instance_version_url]ProjectSetup/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Project Setup</a>.  Click on ""Additional Customizations""
+</p>",,,,,,,,,,,,,
+no_missing_values,missing_values,,dropdown,"No Missing Values. Missing values are not an option.","1, Yes | 0, No | 2, Maybe",,,,,,,,,,,," @NOMISSING"
+missing_values_standard,missing_values,,dropdown,"REDCap's standard missing values, plus Yes and No","0, No | 1, Yes | NI, No information | INV, Invalid | UNK, Unknown | NASK, Not asked | ASKU, Asked but unknown | NAV, Temporarily unavailable | NA, Not applicable | NAVU, Not available | NP, Not present | QS, Sufficient quantity | TRC, Trace | UNC, Unencoded | DER, Derived | PINF, Positive infinity | NINF, Negative infinity | OTH, Other",,,,,,,,,,,,
+custom_only_missing_values,missing_values,,dropdown,"Custom Only Missing Values Plus Yes and No.  Only the following values should be displayed.
+
+0, No
+1, Yes
+-1, NA -1
+-2, Not available -2
+-9, Not Done -9
+9999999, 9999999machine malfunction.","0, No | 1, Yes | -1, NA -1 | -2, Not available -2 | -9, Not Done -9 | 9999999, 999999 9 machine malfunction.",,,,,,,,,,,," @NOMISSING"
+missing_value_notes,missing_values,,notes,Notes,,,,,,,,,LH,,,,
+validation_default_directions,validations_default,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">REDCap comes with the following field validations enabled by default.</p>
+<a href=""[set_up_arm_1][instance_version_url]ControlCenter/validation_type_setup.php"" target=""_blank"">Control Center Validations</a>",,,,,,,,,,,,,
+text_no_validations,validations_default,,text,"Text Box with no validation.",,,,,,,,,,,,," @DEFAULT=""Anything is possible 1234 !%*"""
+letters_only,validations_default,,text,"Letters Only",,,alpha_only,,,,,,,,,," @DEFAULT=""Anything is possible 1234"""
+text_date_validation_dmy,validations_default,"Dates with various formats",text,"Text Box  Date (D-M-Y) 
+with range 1/1/2019 - 30/12/2039",,,date_dmy,2019-01-01,2039-12-30,,,,,,,," @TODAY"
+text_date_validation_mdy,validations_default,,text,"Text Box  Date (M-D-Y) 
+with range 1/1/2019 - 12/30/2039",,,date_mdy,2019-01-01,2039-12-30,,,,,,,," @NOW"
+text_date_validation_ymd,validations_default,,text,"Text Box Date (Y-M-D) 
+with range 2019/1/1 - 2039/12/30",,,date_ymd,2019-01-01,2039-12-30,,,,,,,," @NOW"
+text_datetime_dmyhm,validations_default,"Date Times",text,"Text Box Datetime (D-M-Y H:M)
+
+Min: 01-01-2019 01:01
+Max: 30-12-2039 23:59",,,datetime_dmy,"2019-01-01 01:01","2039-12-30 23:59",,,,,,,," @NOW"
+text_datetime_mdyhm,validations_default,,text,"Text Box Datetime (D-M-Y H:M)
+
+Min: 01-01-2019 01:01
+Max: 12-30-2039 23:59",,,datetime_mdy,"2019-01-01 01:01","2039-12-30 23:59",,,,,,,," @NOW"
+text_datetime_ymdyh,validations_default,,text,"Text Box Datetime (Y-D-M H:M)
+
+Min: 2019-01-01 01:01
+Max: 2039-12-30 23:59",,,datetime_ymd,"2019-01-01 01:01","2039-12-30 23:59",,,,,,,," @NOW"
+text_datetime_dmyhms,validations_default,"Date Time with Seconds",text,"Text Box Datetime (D-M-Y H:M:S)
+
+Min: 05-01-1925 01:01:01
+Max: 31-12-2035 23:59:00",,,datetime_seconds_dmy,"1925-01-05 01:01:00","2035-12-31 23:59:00",,,,,,,," @NOW"
+text_datetime_mdyhms,validations_default,,text,"Text Box Datetime (M-D-Y H:M:S)
+
+Min: 01-01-2019 01:01:00
+Max: 12-31-2039 23:59:59",,,datetime_seconds_mdy,"2019-01-01 01:01:00","2039-12-31 23:59:00",,,,,,,," @NOW"
+text_datetime_ymdhms,validations_default,,text,"Text Box Datetime with seconds (Y-D-M H:M:S)
+
+Min: 2019-01-01 01:01:00
+Max: 2039-12-30 23:59:59",,,datetime_seconds_ymd,"2019-01-01 01:01:00","2039-12-30 23:59:00",,,,,,,," @NOW"
+text_email,validations_default,"Email, Integers, Decimals, Phone, Time, Zip Code",text,email,,,email,,,y,,,,,,," @DEFAULT=""me@example.com"""
+text_integer,validations_default,,text,"Integer
+
+Min: -10
+Max: 1234567890",,,integer,-10,1234567890,,,,,,,," @DEFAULT=""-10"""
+text_number,validations_default,,text,"Number (Decimals allowed)
+
+Min: -2.9
+Max: 33.045",,,number,-2.9,33.045,,,,,,,," @DEFAULT=""-.29"""
+text_phone_north_america,validations_default,,text,"Phone (North America)",,,phone,,,,,,,,,," @DEFAULT=""509-555-5555"""
+text_time,validations_default,,text,"Time (HH:MM)
+
+Min: 00:01
+Max: 14:56",,,time,00:01,14:56,,,,,,,," @NOW"
+text_zipcode,validations_default,,text,"Zipcode (U.S.)",,,zipcode,,,,,,,,,," @DEFAULT=""99037"""
+notes_box_required,validations_default,,notes,"Notes Box Required",,,,,,,,y,LH,,,," @DEFAULT=""Plaid organic cred copper mug live-edge. Forage godard palo santo hashtag, retro franzen photo booth gluten-free blue bottle. Shoreditch irony hexagon banjo cronut aesthetic knausgaard craft beer locavore. Franzen sartorial street art, humblebrag tote bag hoodie synth 8-bit snackwave hexagon ramps organic. Semiotics scenester salvia, pickled bicycle rights chicharrones schlitz blue bottle taxidermy gastropub microdosing fixie +1 taiyaki"""
+additional_vals_directions,validations_additional_available,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Additional validations may be enabled for all users.  Check the validations below.  Alter one or two, then leave the field to see an error message.</p>
+
+Steps to enable a validation:
+1) Click on Control Center
+2) Click on ""Field Validation Types"" under System Configuration
+3) Choose a validation type from the left side
+4) Click enable
+
+A field may have a validation type that is disabled in the control center.  This is how these built in validations continue to work on this page but may be disabled.
+
+<em>You must be an administrator to enable the following validations</p><a href=""[set_up_arm_1][instance_version_url]ControlCenter/validation_type_setup.php"" target=""_blank"">Control Center Validations</a></em>",,,,,,,,,,,,,
+postalcode_french,validations_additional_available,,text,"Code Postal 5 caracteres (France)",,,postalcode_french,,,,,,,,,," @DEFAULT=""88888"""
+alpha_only,validations_additional_available,,text,"Letters only (alpha_only)",,,alpha_only,,,,,,,,,," @DEFAULT=""abcdef"""
+mrn_10d,validations_additional_available,,text,"MRN (10 digits)(mrn_10d)",,,mrn_10d,,,,,,,,,," @DEFAULT=""1234567890"""
+mrn_generic,validations_additional_available,,text,"MRN (generic) (mrn_generic) ",,,mrn_generic,,,,,,,,,," @DEFAULT=""99999"""
+number_1dp_comma_decimal,validations_additional_available,,text,"Number (1 decimal place - comma as decimal) (number_1dp_comma_decimal)",,,number_1dp_comma_decimal,,,,,,,,,," @DEFAULT=""1,1"""
+number_1dp,validations_additional_available,,text,"Number (1 decimal place) (number_1dp)",,,number_1dp,,,,,,,,,," @DEFAULT=""1.1"""
+number_2dp_comma_decimal,validations_additional_available,,text,"Number (2 decimal places - comma as decimal) (number_2dp_comma_decimal)",,,number_2dp_comma_decimal,,,,,,,,,," @DEFAULT=""99,99"""
+number_2dp,validations_additional_available,,text,"Number (2 decimal places) (number_2dp)",,,number_2dp,,,,,,,,,," @DEFAULT=""99.99"""
+number_3dp_comma_decimal,validations_additional_available,,text,"Number (3 decimal places - comma as decimal) (number_3dp_comma_decimal)",,,number_3dp_comma_decimal,,,,,,,,,," @DEFAULT=""99,999"""
+number_3dp,validations_additional_available,,text,"Number (3 decimal places) (number_3dp)",,,number_3dp,,,,,,,,,," @DEFAULT=""99.999"""
+number_4dp_comma_decimal,validations_additional_available,,text,"Number (4 decimal places - comma as decimal) (number_4dp_comma_decimal)",,,number_4dp_comma_decimal,,,,,,,,,," @DEFAULT=""9,9999"""
+number_4dp,validations_additional_available,,text,"Number (4 decimal places) (number_4dp)",,,number_4dp,,,,,,,,,," @DEFAULT=""9.9999"""
+number_comma_decimal,validations_additional_available,,text,"Number (comma as decimal) (number_comma_decimal)",,,number_comma_decimal,,,,,,,,,," @DEFAULT=""2,345623"""
+phone_australia,validations_additional_available,,text,"Phone (Australia) (phone_australia)",,,phone_australia,,,,,,,,,," @DEFAULT=""(02) 9876 5432"""
+postalcode_australia,validations_additional_available,,text,"Postal Code (Australia) (postalcode_australia)",,,postalcode_australia,,,,,,,,,," @DEFAULT=""2620"""
+postalcode_canada,validations_additional_available,,text,"Postal Code (Canada) (postalcode_canada) ",,,postalcode_canada,,,,,,,,,," @DEFAULT=""A0A 0A0"""
+postalcode_germany,validations_additional_available,,text,"Postal Code (Germany) (postalcode_germany)",,,postalcode_germany,,,,,,,,,," @DEFAULT=""14199"""
+ssn,validations_additional_available,,text,"Social Security Number (U.S.)(ssn)",,,ssn,,,,,,,,,," @DEFAULT=""132-45-6789"""
+time_mm_ss,validations_additional_available,,text,"Time (MM:SS) (time_mm_ss)",,,time_mm_ss,,,,,,,,,," @DEFAULT=""11:45"""
+vmrn,validations_additional_available,,text,"Vanderbilt MRN (vmrn)",,,vmrn,,,,,,,,,," @DEFAULT=""56789"""
+file_upload_directions,file_upload_field,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Upload and download a file to a field.</p>",,,,,,,,,,,,,
+file_upload,file_upload_field,,file,"Upload a file here",,,,,,,,,,,,,
+upload_field_doc_status,file_upload_field,,radio,"Were you able to upload a document to the field above?","1, Yes | 0, No",,,,,,,,RH,,,,
+download_uploaded_doc,file_upload_field,,radio,"Are you able to save and stay on the record, and then download the attached document?","1, Yes | 0, No",,,,,,,,RH,,,,
+file_upload_notes,file_upload_field,,notes,Notes,,,,,,,,,LH,,,,
+bio_portal_directions,bio_portal,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">This service utilizes the BioPortal API web service (see documentation at http://bioportal.bioontology.org). For this feature to work, the REDCap web server must be able to make outbound HTTP requests to https://data.bioontology.org/.
+
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/modules_settings.php"" target=""_blank"" style=""color:#FFF;"">Modules Configuration</a></em></p>",,,,,,,,,,,,,
+is_bio_portal_enabled,bio_portal,,radio,"Is the BioPortal Enabled?","1, Yes | 0, No",,,,,,,,RH,,,,
+test_bio_port_selection,bio_portal,,text,"Search for the text ""park"".   Choose from one of the many options that should come up. ",BIOPORTAL:ICD9CM,,,,,,"[is_bio_portal_enabled] = '1'",,,,,,
+bio_portal_notes,bio_portal,,notes,Notes,,,,,,,,,LH,,,,
+field_bank_directions,field_bank,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">
+The Field Bank allows users to import fields from various standardized catalogs when building their instruments via the Online Designer.
+
+If disabled the 'Import from Field Bank' button will be hidden in the Online Designer for all users.
+
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/modules_settings.php"" target=""_blank"" style=""color:#FFF;"">Modules Configuration</a></em></p>",,,,,,,,,,,,,
+is_field_bank_enabled,field_bank,,radio,"Is the Field Bank enabled in  Modules/Services Configuration?","1, Enabled | 2, Disabled",,,,,,,,RH,,,,
+field_bank_button,field_bank,,radio,"In the instrument designer, within an instrument is there a button labeled ""Import from Field Bank""?","1, Yes | 0, No",,,,,,"[is_field_bank_enabled] = '1'",,RH,,,,
+field_bank_status,field_bank,,radio,"1) Clicking on the button shows a pop up with a catalog to search
+2) Search for ""demo""
+3) A number of field are displayed, clicked ""Add Field"" by the first one, which may be Person Birth Date
+4) The field is imported into the online designer.
+","1, Passes | 0, Does not pass",,,,,,"[is_field_bank_enabled] = '1'",,LH,,,,
+field_bank_notes,field_bank,,notes,Notes,,,,,,,,,LV,,,,
+dictionary_directions,data_dictionary,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">The Data Dictionary is a specifically formatted CSV file within which you may construct your project fields and afterward upload the file to commit the changes to your project.
+
+Ensure you can download and upload a data dictionary
+
+Do NOT upload a data dictionary into this project.  Instead choose another project to test that functionality.
+</p>",,,,,,,,,,,,,
+dictionary_download,data_dictionary,,radio,"Are you able to download the data dictionary.  You can download this project's data dictionary <a href=""[set_up_arm_1][instance_version_url]Design/data_dictionary_upload.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"">here</a>","1, Yes | 0, No",,,,,,,,RH,,,,
+dictionary_upload,data_dictionary,,radio,"Either create a new project or use another test project and upload the data dictionary there. ","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dictionary_commit_changes,data_dictionary,,radio,"Were you able to commit the changes?
+<em>If you download this data dictionary there may be several warnings about variable name lengths.  This is OK</em>","1, Yes | 0, No",,,,,,,,RH,,,,
+user_rights_directions,user_rights,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: <em>Visit <a href=""[set_up_arm_1][instance_version_url]UserRights/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">User Rights</a></em>
+</p>
+",,,,,,,,,,,,,
+user_rights_display,user_rights,,radio,"User right page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+user_role_create,user_rights,,radio,"Create a role call ""Temp""","1, Yes | 0, No",,,,,,,,RH,,,,
+user_role_modify,user_rights,,radio,"In the ""Temp"" user rights, check ""Project Disign and Setup"", ""User rights"" and ""Data Access Groups"" rights and save.","1, Pass | 0, Fail",,,,,,,,RH,,,,
+user_rights_assign_role,user_rights,,radio,"Assign a new user to the role ""Temp""","1, Pass | 0, Fail",,,,,,,,RH,,,,
+user_rights_change_role,user_rights,,radio,"Re-assign the user the role of ""Data Entry"".
+<em>(click on the user and chose ""Re-assign to other role"")</em>","1, Pass | 0, Fail",,,,,,,,RH,,,,
+user_rights_remove_role,user_rights,,radio,"Remove the user from the role of ""Data Entry"".
+<em>(click on the user and chose ""Remove from role"")</em>","1, Pass | 0, Fail",,,,,,,,RH,,,,
+user_rights_delete_user,user_rights,,radio,"Delete the user from the project.
+<em>1) Click on the user. 2) Click on ""Edit user privileges"". 3) click on ""Remove user"" and confirm.</em>","1, Pass | 0, Fail",,,,,,,,RH,,,,
+user_rights_upload_download,user_rights,,radio,"Try out the ""Upload or download users, roles, and assignments""","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dag_check_directions,dags,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Data Access Groups, DAGs, restrict viewing of data within a database. A typical use of Data Access Groups is a multi-site study where users at each site should only be able to view data from their site but not any other sites. Users at each site are assigned to a group, and will only be able to see records created by users within their group.
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]index.php?route=DataAccessGroupsController:index&pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Data Access Managment</a></em>
+</p>
+",,,,,,,,,,,,,
+dags_defined,dags,,radio,"The following DAGS are available:
+
+Georgia
+Texas
+United States
+Washington","1, Yes | 0, No",,,,,,,,RH,,,,
+dag_new,dags,,radio,"Add a new Data Access Group called ""Temp""
+Did it work?","1, Yes | 0, No",,,,,,,,RH,,,,
+dag_assign_user,dags,,radio,"Assign user to a group:
+Did it work?","1, Yes | 0, No",,,,,,,,RH,,,,
+dag_unassign,dags,,radio,"Un-assign a user to a group [No assignment].
+Did it work?","1, Yes | 0, No",,,,,,,,RH,,,,
+dag_delete,dags,,radio,"Delete a DAG.
+Did it work?","1, Yes | 0, No",,,,,,,,RH,,,,
+dat_smart_vars,dags,"DAG Smart Variables",radio,"All DAG access smart variables below are correct","1, Yes | 0, No",,,,,,,,RH,,,,
+dag_check_user_dag_name,dags,,text,"&lsqb;user-dag-name] [user-dag-name]: The Data Access Group (the unique group name) to which the current user belongs (blank if not in a DAG).",,,,,,,,,,,,," @DEFAULT=""[user-dag-name]"""
+dag_check_user_dag_id,dags,,text,"&lsqb;user-dag-id] [user-dag-id]: The group ID number of the Data Access Group to which the current user belongs (blank if not in a DAG).",,,,,,,,,,,,," @DEFAULT=""[user-dag-id]"""
+dag_check_user_dag_label,dags,,text,"&lsqb;user-dag-label] [user-dag-label]: The name/label of the Data Access Group to which the current user belongs (blank if not in a DAG).",,,,,,,,,,,,," @DEFAULT=""[user-dag-label]"""
+dag_check_record_dag_name,dags,,text,"&lsqb;record-dag-name] [record-dag-name]: The Data Access Group (the unique group name) to which the current record belongs (blank if not in a DAG).",,,,,,,,,,,,," @DEFAULT=""[record-dag-name]"""
+dag_check_record_dag_id,dags,,text,"&lsqb;record-dag-id] [record-dag-id]: The group ID number of the Data Access Group to which the current record belongs (blank if not in a DAG).",,,,,,,,,,,,," @DEFAULT=""[record-dag-id]"""
+dag_check_record_dag_label,dags,,text,"&lsqb;record-dag-label] [record-dag-label]: The name/label of the Data Access Group to which the current record belongs (blank if not in a DAG).",,,,,,,,,,,,," @DEFAULT=""[record-dag-label]"""
+dag_check_passed,dags,,calc,"# Passing","sum( if([user-dag-name] = [user-dag-name], 1, 0), if([user-dag-id] = [user-dag-id], 1, 0), if([user-dag-label] = [user-dag-label], 1, 0), if([record-dag-name] = [record-dag-name], 1, 0), if([record-dag-id] = [record-dag-id], 1, 0), if([record-dag-label] = [record-dag-label], 1, 0) )",,,,,,,,,,,,
+asi_trigger_directions,asi_email_trigger_part_1,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Trigger an ASI.
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]Design/online_designer.php?pid=[instance_pid]"" target=""_blank"" style=""color:#FFF;"">Settings can be found via the Online Designer page</a></em>
+</p>
+",,,,,,,,,,,,,
+asi_email_body,asi_email_trigger_part_1,,notes,"Email Body.  This will be piped into the Automated Survey Invitation, ASI.",,,,,,,,,LH,,,,
+asi_send_now,asi_email_trigger_part_1,,radio,"send now
+(This is the trigger and an email will be sent)","1, Yes | 0, No | 3, Maybe later",,,,,,,,,,,,
+asi_received_directions,asi_survey_part_2,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: You will receive this survey via an Automated Survey Invitation.
+</p>",,,,,,,,,,,,,
+took_survey_via_asi,asi_survey_part_2,,radio,"Did you get this survey via ASI?","1, Yes | 0, No",,,,,,,,RH,,,,
+asi_survey_comment,asi_survey_part_2,,text,Comment,,,,,,,,,,,,,
+asi_confirm_directions,asi_confirmation_email_part_3,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Confirm that you received an email after taking the survey with your survey results attached.</em>
+</p>
+",,,,,,,,,,,,,
+asi_confirm_invitation,asi_confirmation_email_part_3,,radio,"Did you get the ASI invitation? ","1, Yes | 0, No",,,,,,,,RH,,,,
+asi_confirm_take_survey,asi_confirmation_email_part_3,,radio,"Did you take the survey?","1, Yes | 0, No",,,,,,,,RH,,,,
+asi_confirm_emailed_pdf,asi_confirmation_email_part_3,,radio,"Did you receive confirmation with the filled in survey attached to the email as a PDF?","1, Yes | 0, No",,,,,,,,RH,,,,
+alert_directions,alerts_and_notifications,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">When the Survey, 12 ASI Survey (Part 2), is taken an alert is sent out.  
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]index.php?pid=[instance_pid]&route=AlertsController:setup"" target=""_blank"" style=""color:#FFF;"">Alerts and Notifications Settings</a></em>
+Alerts are sent to [set_up_arm_1][to_email]
+Alerts are sent from [set_up_arm_1][from_email]
+</p>
+",,,,,,,,,,,,,
+alert_sent_received,alerts_and_notifications,,radio,"Did you receive the email alert from updating the ASI Survey (Part 2)?","1, Yes | 0, No",,,,,,,,RH,,,,
+alert_notes,alerts_and_notifications,,notes,Notes,,,,,,,,,LH,,,,
+multi_lang_setup_readme,multilanguage_set_up,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Open <a style=""color:#FFF;"" href=""[set_up_arm_1][instance_version_url]index.php?route=MultiLanguageController:systemConfig"" target=""_blank"">Multi-Language Management</a> in a new tab.
+
+To enable or disable go to the second tab ""Settings"". 
+</p>
+
+",,,,,,,,,,,,,
+is_multi_lang_enabled,multilanguage_set_up,,radio,"Is Multi-Language Management enabled?","1, Yes | 0, No",,,,,,,,RH,,,,
+multi_language_info,multilanguage_set_up,,descriptive,"This project already has a single form translated.  It is the Multi-Language Instrument.",,,,,,,,,,,,,
+multi_lang_directions,multilanguage_instrument,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Try out data entry in the various languages. 
+</p>",,,,,,,,,,,,,
+breakfast,multilanguage_instrument,,radio,"What do you want for breakfast","1, Eggs | 2, Bacon | 3, Oatmeal | 4, Bananas | -1, I skip breakfast",,,,,,,,,,,,
+lunch,multilanguage_instrument,,radio,"What do you eat for lunch?","1, Chicken Lettuce Wraps | 2, Vegan Crunch Wrap Supreme | 3, Hearty Stuffed Peppers | 4, Fish Tacos | 5, Shrimp and Snow Pea Stir-fry | 6, Black Bean Tostadas",,,,,,,,,,,,
+eat_time,multilanguage_instrument,,text,"When did you last eat?",,,datetime_seconds_mdy,,,,,,,,,," @NOW"
+ice_cream_flavor,multilanguage_instrument,,text,"What is your favorite flavor of ice cream?",,,,,,,,,,,,,
+url_short_directions,link_shortening_service,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Link Shortening Service: When enabled, REDCap provides the option to use the URL shortening service named REDCAP.LINK to shorten or customize public survey links, links for public project dashboards, and public report links. This service is hosted by Vanderbilt on AWS. If your server is behind a firewall and cannot make outbound HTTP requests to websites on the web, then you should disable this service.
+
+<em>Open <a style=""color:#FFF;"" href=""[set_up_arm_1][instance_version_url]ControlCenter/modules_settings.php"" target=""_blank"">Modules Configuration</a> in a new tab.</em>
+</p>",,,,,,,,,,,,,
+is_url_short_enabled,link_shortening_service,,radio,"Is the URL shortening service enabled?","1, Enabled | 0, Disabled",,,,,,,,RH,,,,
+url_short_works,link_shortening_service,,radio,"<em>Open <a href=""[set_up_arm_1][instance_version_url]ControlCenter/url_shortener.php"" target=""_blank"">URL Shortener</a> in a new tab.</em>.
+Enter in a URL and create a short random URL.
+
+If a new URL is created, this test passes.
+If a short URL is not created and an error message like ""Unknown error"" appears this test does not pass.","1, Pass | 0, Fail",,,,,,,,RH,,,,
+url_shortening_comment,link_shortening_service,,notes,Comment,,,,,,,,,LV,,,,
+project_create_directions,project_creation,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: <em>Visit <a href=""[redcap-url]index.php?action=create"" target=""_blank"" style=""color:#FFF;"">Create a new project</a></em>
+</p>",,,,,,,,,,,,,
+project_create_scratch,project_creation,,radio,"Create a project from scratch.","1, Pass | 0, Fail",,,,,,,,RH,,,,
+project_create_template,project_creation,,radio,"Create a project from a template.","1, Pass | 0, Fail",,,,,,,,RH,,,,
+project_create_xml,project_creation,,radio,"Create a project from a XML.","1, Pass | 0, Fail",,,,,,,,RH,,,,
+project_create_notes,project_creation,,notes,Notes,,,,,,,,,LV,,,,
+codebook_directions,codebook,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]Design/data_dictionary_codebook.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Codebook</a>
+</p>",,,,,,,,,,,,,
+codebook_display,codebook,,radio,"Does the codebook display correctly?","1, Yes | 0, No",,,,,,,,RH,,,,
+file_repo_directions,file_repository,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Test the File Repository</p>
+",,,,,,,,,,,,,
+file_repo_open,file_repository,,radio,"Navigate to the File Repository.
+<a href=""[set_up_arm_1][instance_version_url]FileRepository/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"">Open File Repo in new Tab</a>","1, Pass | 0, Fail",,,,,,,,RH,,,,
+file_repo_download,file_repository,,radio,"Download the file ""Test text document"".
+If the document is not there, upload any small text file to complete this test.","1, Pass | 0, Fail",,,,,,,,RH,,,,
+file_repo_upload,file_repository,,radio,"Upload the recently download text file, or another file of your choice.  Name it delete because it will be deleted at the end of this test","1, Pass | 0, Fail",,,,,,,,RH,,,,
+file_repo_email,file_repository,,radio,"<i class=""fas fa-envelope""></i> Email the file securely.  It is the email icon listed under the action column.
+This test passes after following the link in the email and the file is downloaded.","1, Pass | 0, Fail",,,,,,,,RH,,,,
+file_repo_delete,file_repository,,radio,"Delete the recently upload file.
+<em>Do NOT delete any other files</em>","1, Pass | 0, Fail",,,,,,,,RH,,,,
+file_repo_notes,file_repository,,notes,Notes,,,,,,,,,LH,,,,
+xml_import_directions,project_creation_by_xml_upload,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;""><em>Create a project by uploading a project XML. Either the project xml file that was downloaded at another time or a project XML of your choice can be used.
+
+<em>Visit <a href=""[set_up_arm_1][instance_url]index.php?action=create"" target=""_blank"" style=""color:#FFF;"">Create a new project.</a>  Choose the option ""Upload a REDCap project XML file (CDISC ODM format)""</em>
+
+<em>This project will eventually be deleted.</em>
+
+A Sample XML project is available for download in the ""<a href=""[set_up_arm_1][instance_version_url]Design/online_designer.php?pid=[set_up_arm_1][instance_pid]&page=helper_files"" target=""_blank"" style=""color:#FFF;"">Helper Files</a>"" instrument.",,,,,,,,,,,,,
+xml_import_project,project_creation_by_xml_upload,,radio,"Create a new project via uploading a project XML file.
+<em>The purpose can be Operation/Support.</em>","1, Pass | 0, Fail",,,,,,,,RH,,,,
+xml_import_notes,project_creation_by_xml_upload,,notes,Notes,,,,,,,,,LH,,,,
+xml_import_help,project_creation_by_xml_upload,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">You may download a project XML file here:  [set_up_arm_1][form-link:helper_files: Helper Files]</p>",,,,,,,,,,,,,
+template_directions,project_creation_by_template,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;""><em>Create a project by uploading a project XML. Either the project xml file that was downloaded at another time or a project XML of your choice can be used.
+
+<em>Visit <a href=""[set_up_arm_1][instance_url]index.php?action=create"" target=""_blank"" style=""color:#FFF;"">Create a new project.</a>  Choose the option ""Use a template (choose one below)""</em>
+
+<em>This project will eventually be deleted.</em></p>",,,,,,,,,,,,,
+template_project,project_creation_by_template,,radio,"Create a project by using a template.
+<em>The purpose can be Operation/Support.</em>","1, Pass | 0, Fail",,,,,,,,RH,,,,
+template_notes,project_creation_by_template,,notes,Notes,,,,,,,,,LH,,,,
+project_delete_directions,project_deletion,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions
+1) Navigate to the newly created project. Link:  <a href=""[set_up_arm_1][instance_url]index.php?action=myprojects"" style=""color:#FFF;"" target=""_blank"">My projects</a>
+2) Navigate to the ""Other Functionality"".
+3) Click on ""Delete the project"".
+4) Confirm the delete by typing ""delete"" or ""DELETE"".
+5) Click on Delete the project.
+6) Click on ""Yes, delete the project"".
+7) Afterwards it redirects back to My Project page.
+8) Confirm the project is no longer in the list.
+</p>
+",,,,,,,,,,,,,
+project_delete,project_deletion,,radio,"The project was deleted.
+Please make sure this is a test project.","1, Pass | 0, Fail",,,,,,,,RH,,,,
+project_delete_notes,project_deletion,,notes,"Project Deletion Notes",,,,,,,,,LH,,,,
+calendar_directions,calendar,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Try out the calendar
+<em>Visit the <a href=""[set_up_arm_1][instance_version_url]Calendar/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Calendar</a></em>
+</p>",,,,,,,,,,,,,
+calendar_event_add,calendar,,radio,"Add a new event.
+Was the new event added?","1, Yes | 0, No",,,,,,,,RH,,,,
+calendar_event_delete,calendar,,radio,"Delete the same event.
+Was the new event deleted?","1, Yes | 0, No",,,,,,,,RH,,,,
+data_reports_directions,data_reports,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]DataExport/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Data Exports, Reports and Stats</a></em>
+</p>
+",,,,,,,,,,,,,
+data_report_all,data_reports,,radio,"View the ""All Data"" report.","1, Pass | 0, Fail",,,,,,,,RH,,,,
+data_reports_export,data_reports,,radio,"Export ""All Data"" ","1, Pass | 0, Fail",,,,,,,,RH,,,,
+data_reports_stats,data_reports,,radio,"View the ""Stats and Charts""","1, Pass | 0, Fail",,,,,,,,RH,,,,
+data_export_custom,data_reports,,radio,"Make a custom selection and view the report","1, Pass | 0, Fail",,,,,,,,RH,,,,
+log_directions,project_logging,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]Logging/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Project Logging</a>
+</p>
+",,,,,,,,,,,,,
+log_acurate,project_logging,,radio,"The log is accurate","1, Yes | 0, No",,,,,,,,RH,,,,
+log_notes,project_logging,,notes,Notes,,,,,,,,,LH,,,,
+email_log_directions,email_logging,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]index.php?route=EmailLoggingController:index&pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Email Logging</a>
+</p>
+",,,,,,,,,,,,,
+email_log_search,email_logging,,radio,"Specify some search criteria and press ""Search emails""","1, Completed | 2, Not completed",,,,,,,,RH,,,,
+email_log_acurate,email_logging,,radio,"The email log is accurate","1, Yes | 0, No",,,,,,,,RH,,,,
+email_log_notes,email_logging,,notes,Notes,,,,,,,,,LH,,,,
+field_comment_directions,field_comment,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">When the Data Resolution Workflow is not enabled, the field comments, indicated by the balloon icon  <i class=""far fa-comment""></i>  next to a field, are enabled by default. Any user with data entry rights can create comments. These comments are recorded in the Field Comment Log, which appears in the list of Applications.
+
+<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Visit <a href=""[set_up_arm_1][instance_version_url]ProjectSetup/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Project Setup</a>.  Click on ""Additional customizations"".   Scroll down to the section: Enable the Field Comment Log or Data Resolution Workflow (Data Queries).  
+</p>",,,,,,,,,,,,,
+field_comment_enabled,field_comment,,radio,"Is the section <em>Field Comment Log or Data Resolution Workflow (Data Queries)</em> enabled?","1, Yes | 0, No",,,,,,,,RH,,,,
+field_comment_choosen,field_comment,,radio,"Which one is active?","1, None | 2, Field Comment Log | 3, Data Resolution Workflow",,,,,,"[field_comment_enabled] = '1'",,,,,,
+field_comment_create,field_comment,,radio,"Create a field comment on this field by clicking on the comment icon <i class=""far fa-comment""></i> next to the field.  After the comment is saved the icon changes color.
+Did it work?","1, Yes | 0, No",,,,,,"[field_comment_choosen] = '2'",,RH,,,,
+field_comment_log,field_comment,,radio,"View the field comment log. Visit <a href=""[set_up_arm_1][instance_version_url]DataQuality/field_comment_log.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"">Field Comment Logs</a>.  
+Optional, download the comment log.
+Did it work?","1, Yes | 0, No",,,,,,"[field_comment_choosen] = '2'",,RH,,,,
+field_comment_delete,field_comment,,radio,"Delete the previously created field comment.
+Did it work?","1, Yes | 0, No",,,,,,"[field_comment_choosen] = '2'",,RH,,,,
+custom_locking_directions,custom_record_locking_and_esignature,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]Locking/locking_customization.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Custom Record Locking</a></em>
+
+Only users with Lock/Unlock user privileges can access that page, and they are the only ones who can lock and unlock records for a specific form.
+
+The defaults options are checked for ""Display the lock option..."" and unchecked for ""Also display E-signature"". 
+
+This form is checked for ""display E-signature"" and there is also custom text.
+</p>",,,,,,,,,,,,,
+custom_lock_display,custom_record_locking_and_esignature,,radio,"Does the page display correctly?","1, Yes | 0, No",,,,,,,,RH,,,,
+custom_lock_toggle,custom_record_locking_and_esignature,,radio,"1) Toggle the column ""Display the Lock option for this instrument?"" for the 00 Read Me instrument.
+
+2) Toggle the column ""Also Display E-Signature option on instrument?"" 
+
+3) Create custom text
+
+4) Save","1, Pass | 0, Fail",,,,,,,,RH,,,,
+custom_lock_text_remove,custom_record_locking_and_esignature,,radio,"If there is custom text, remove it by clicking the <i class=""fas fa-times fa-fw""></i> icon","1, Pass | 0, Fail",,,,,,,,RH,,,,
+custom_lock_enabled,custom_record_locking_and_esignature,,radio,"Is there the ability to lock this form at the bottom of the instrument?","1, Yes | 0, No",,,,,,,,RH,,,,
+custom_esign_enabled,custom_record_locking_and_esignature,,radio,"Is there the ability to E-Sign this form at the bottom of the instrument?","1, Yes | 0, No",,,,,,,,RH,,,,
+custom_lock_esign,custom_record_locking_and_esignature,,radio,"Check both ""Lock"" and ""E-Signature"" and save.  The username/password verification opens.  Enter the username and password and save.  Is the instrument locked?","1, Yes | 0, No",,,,,,,,RH,,,,
+custom_lock_management,custom_record_locking_and_esignature,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]Locking/esign_locking_management.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">E-signature and Locking Management</a></em>.  It is the second tab at the top.
+",,,,,,,,,,,,,
+custom_lock_actions,custom_record_locking_and_esignature,,radio,"Try one or more of following actions: 
+
+<ul style=""line-height: .9em;"">
+<li>SHOW ALL ROWS</li>
+<li>Show timestamp / user</li>
+<li>Hide timestamp / user</li>
+<li>Show locked</li>
+<li>Show not locked</li>
+<li>Show e-signed</li>
+<li>Show not e-signed (excludes N/A)</li>
+<li>Show both locked and e-signed</li>
+<li>Show neither locked nor e-signed (excludes N/A)</li>
+<li>Show locked but not e-signed (excludes N/A)</li>
+</ul>
+
+Do they work as expected?","1, Yes | 0, No",,,,,,,,RH,,,,
+custom_lock_unlock,custom_record_locking_and_esignature,,radio,"Unlock this form.
+Does it unlock?  If it was E-Signed, was the e-signature removed?","1, Yes | 0, No",,,,,,,,RH,,,,
+custom_locking_note,custom_record_locking_and_esignature,,notes,Notes,,,,,,,,,LH,,,,
+data_quality_directions,data_quality_rules,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">The Data Quality module will allow you to execute data quality rules upon your project data to check for discrepancies in your data. 
+
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]DataQuality/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Data Quality</a></em>
+Execute each rule, create a custom rule and remove a rule.</p>",,,,,,,,,,,,,
+dq_blanks,data_quality_rules,,radio,"Execute Rule A ""Blank value*"".  
+View the results.
+
+","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dq_blank_required,data_quality_rules,,radio,"Execute Rule B ""Blank values* (required fields only)"".  
+View the results.
+
+","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dq_incorrect_type,data_quality_rules,,radio,"Execute Rule C ""Field validation errors (incorrect data type)"".
+View the results.
+
+","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dq_out_of_range,data_quality_rules,,radio,"Execute Rule D ""Field validation errors (out of range)"".
+View the results.
+
+","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dq_outliers,data_quality_rules,,radio,"Execute Rule E ""Outliers for numerical fields (numbers, integers, sliders, calc fields)**"".
+View the results.
+
+","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dq_hidden_values,data_quality_rules,,radio,"Execute Rule F ""Hidden fields that contain values***"".  View the results.
+
+","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dq_choice_invalid,data_quality_rules,,radio,"Execute Rule G ""Multiple choice fields with invalid values*"".
+View the results.
+
+","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dq_incorrect_calc,data_quality_rules,,radio,"Execute Rule H ""Incorrect values for calculated fields"".
+View the results.
+
+","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dq_missing_data_codes,data_quality_rules,,radio,"Execute Rule I ""Fields containing ""missing data codes"""".
+View the results.
+
+","1, Pass | 0, Fail",,,,,,,,RH,,,,
+dq_custom,data_quality_rules,,text,"Custom Data Quality Rule.  Text must be at least 4 characters long.",,,,,,,,y,,,,," @DEFAULT=""AB"""
+dq_custom_real_time,data_quality_rules,,radio,"Enter only 2 characters into the open text field.  Save the form and the custom data quality rule should be executed in real time and display an error message.","1, Yes | 0, No",,,,,,,,RH,,,,
+dq_custom_create,data_quality_rules,,radio,"Create a custom rule that the custom text in the field ""dq_custom"" must be no longer than 10 characters.
+Did it work?","1, Yes | 0, No",,,,,,,,RH,,,,
+dq_custom_execute,data_quality_rules,,radio,"Execute the custom rule you created
+Did it work?","1, Yes | 0, No",,,,,,,,RH,,,,
+dq_custom_delete,data_quality_rules,,radio,"Delete the custom rule you created.
+Did it work?","1, Yes | 0, No",,,,,,,,RH,,,,
+dq_download,data_quality_rules,,radio,"Optional: Download and upload Data Quality Rules","1, Yes | 0, No | -1, NA",,,,,,,,RH,,,,
+dq_notes,data_quality_rules,,notes,Notes,,,,,,,,,LH,,,,
+api_directions,project_api,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]API/project_api.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">My Token</a>
+</p>
+",,,,,,,,,,,,,
+api_grant_token,project_api,,radio,"Grant yourself an API token","1, Pass | 0, Fail",,,,,,,,RH,,,,
+api_token_regenerate,project_api,,radio,"Regenerate the API token","1, Pass | 0, Fail",,,,,,,,RH,,,,
+api_manage_all_tokens,project_api,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]API/project_api.php?allUserTokens=1&pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">API Management</a>
+</p>
+",,,,,,,,,,,,,
+api_testing_pass,project_api,,radio,"Does API management page load correctly?","1, Yes | 0, No",,,,,,,,RH,,,,
+api_token_footer,project_api,,descriptive,"To the management of other user's API tokens, other users must be in or add to this project.  ",,,,,,,,,,,,,
+mobile_app_directions,mobile_app,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: 
+ Visit  <a href=""[set_up_arm_1][instance_version_url]/ControlCenter/modules_settings.php"" target=""_blank"" style=""color:#FFF;"">Control Center -> Modules -> Mobile App</a>
+
+Visit <a href=""[set_up_arm_1][instance_version_url]MobileApp/index.php?pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Project Level Mobile App</a>
+
+</p>
+",,,,,,,,,,,,,
+mobile_app_system,mobile_app,,radio,"Is the mobile app enabled at the system level?","1, Yes | 0, No",,,,,,,,RH,,,,
+mobile_app_download,mobile_app,,radio,"Download the mobile app if it is not already download","1, Downloaded | 0, Unable to download",,,,,,"[mobile_app_system] = '1'",,,,,,
+mobile_app_set_up,mobile_app,,radio,"Did the Mobile App Set Up work?","1, Yes | 0, No",,,,,,"[mobile_app_system] = '1'",,RH,,,,
+mobile_app_dash_readme,mobile_app,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Visit each tab:
+ <a href=""[set_up_arm_1][instance_version_url]MobileApp/index.php?dashboard=1&pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Mobile App Dashboard</a>
+ <a href=""[set_up_arm_1][instance_version_url]MobileApp/index.php?activity=1&pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Mobile App Activity</a>
+ <a href=""[set_up_arm_1][instance_version_url]MobileApp/index.php?files=1&pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Mobile App Data Dumps</a>
+ <a href=""[set_up_arm_1][instance_version_url]MobileApp/index.php?logs=1&pid=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Mobile App Logs</a></p>
+",,,,,,,,,,,,,
+mobile_app_pages_load,mobile_app,,radio,"Did the tabs/pages load correctly?","1, Yes | 0, No",,,,,,"[mobile_app_system] = '1'",,RH,,,,
+mobile_app_notes,mobile_app,,notes,Notes,,,,,,,,,LV,,,,
+em_test_directions,external_modules,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions
+<em>Visit <a href=""[set_up_arm_1][instance_version_url]ExternalModules/manager/control_center.php"" target=""_blank"" style=""color:#FFF;"">System External Modules</a></em>
+</p>",,,,,,,,,,,,,
+em_test_no_base,external_modules,,descriptive,"There are no External Modules documented to test.  To add External Modules to test go to the ""Set Up"" event and enter the External Module in to the ""Base External Module"" form.
+<em>This notice will also appear if the 1st External Module was deleted in the Base External Module form</em>",,,,,,,"[set_up_arm_1][base_em_name][1] = """"",,,,,,
+em_test_name_1,external_modules,,text,"<h4 style=""color:#337ab7;font-weight:bold;"">E.M. Name 1</h4><p style=""padding-left:30px;"">- Base Name: [set_up_arm_1][base_em_name][1]
+- Base System Enabled: [set_up_arm_1][base_em_enabled][1]
+- Base Version: [set_up_arm_1][base_em_version][1]</p>",,,,,,,,,,,,," @DEFAULT=""[set_up_arm_1][base_em_name][1]"""
+em_test_version_1,external_modules,,text,"Version tested",,"prefilled with base version",,,,,,,,,,," @DEFAULT=""[set_up_arm_1][base_em_version][1]"""
+em_test_working_1,external_modules,,radio,"Is EM 1 working properly","1, Yes | 0, No",,,,,,,,RH,,,,
+em_test_name_2,external_modules,,text,"<h4 style=""color:#337ab7;font-weight:bold;"">E.M. Name 2</h4>
+Current Base System Enabled: [set_up_arm_1][base_em_enabled][2]
+Current Base Version: [set_up_arm_1][base_em_version][2]",,,,,,,"[set_up_arm_1][base_em_name][2] <> """"",,,,,," @DEFAULT=""[set_up_arm_1][base_em_name][2]"""
+em_test_version_2,external_modules,,text,"<p style=""text-align:right;"">Version tested</p>",,"prefilled with base version",,,,,"[em_test_name_2] <> """"",,,,,," @DEFAULT=""[set_up_arm_1][base_em_version][2]"""
+em_test_working_2,external_modules,,radio,"<p style=""text-align:right;"">Is EM 2 working properly</p>","1, Yes | 0, No",,,,,,"[em_test_name_2] <> """"",,RH,,,,
+em_test_name_3,external_modules,,text,"<h4 style=""color:#337ab7;font-weight:bold;"">E.M. Name 3</h4>
+Current Base System Enabled: [set_up_arm_1][base_em_enabled][2]
+Current Base Version: [set_up_arm_1][base_em_version][2]",,,,,,,"[set_up_arm_1][base_em_name][3] <> """"",,,,,," @DEFAULT=""[set_up_arm_1][base_em_name][3]"""
+em_test_version_3,external_modules,,text,"<p style=""text-align:right;"">Version tested</p>",,"prefilled with base version",,,,,"[em_test_name_3] <> """"",,,,,," @DEFAULT=""[set_up_arm_1][base_em_version][3]"""
+em_test_working_3,external_modules,,radio,"<p style=""text-align:right;"">Is EM 3 working properly</p>","1, Yes | 0, No",,,,,,"[em_test_name_3] <> """"",,RH,,,,
+em_test_reference,external_modules,,descriptive,"The following External Modules are documented in the BASE Set Up:<table class=""table""><tr><td><ol><li>[set_up_arm_1][base_em_name][1]</li><li>[set_up_arm_1][base_em_name][2]</li><li>[set_up_arm_1][base_em_name][3]</li><li>[set_up_arm_1][base_em_name][4]</li><li>[set_up_arm_1][base_em_name][5]</li><li>[set_up_arm_1][base_em_name][6]</li><li>[set_up_arm_1][base_em_name][7]</li><li>[set_up_arm_1][base_em_name][8]</li><li>[set_up_arm_1][base_em_name][9]</li><li>[set_up_arm_1][base_em_name][10]</li></ol></td><td><ol start=""11""><li>[set_up_arm_1][base_em_name][11]</li><li>[set_up_arm_1][base_em_name][12]</li><li>[set_up_arm_1][base_em_name][13]</li><li>[set_up_arm_1][base_em_name][14]</li><li>[set_up_arm_1][base_em_name][15]</li><li>[set_up_arm_1][base_em_name][16]</li><li>[set_up_arm_1][base_em_name][17]</li><li>[set_up_arm_1][base_em_name][18]</li><li>[set_up_arm_1][base_em_name][19]</li><li>[set_up_arm_1][base_em_name][20]</li></ol></td><td><ol start=""21""><li>[set_up_arm_1][base_em_name][21]</li><li>[set_up_arm_1][base_em_name][22]</li><li>[set_up_arm_1][base_em_name][23]</li><li>[set_up_arm_1][base_em_name][24]</li><li>[set_up_arm_1][base_em_name][25]</li><li>[set_up_arm_1][base_em_name][26]</li><li>[set_up_arm_1][base_em_name][27]</li><li>[set_up_arm_1][base_em_name][28]</li><li>[set_up_arm_1][base_em_name][29]</li><li>[set_up_arm_1][base_em_name][30]</li></ol></td><td><ol start=""31""><li>[set_up_arm_1][base_em_name][31]</li><li>[set_up_arm_1][base_em_name][32]</li><li>[set_up_arm_1][base_em_name][33]</li><li>[set_up_arm_1][base_em_name][34]</li><li>[set_up_arm_1][base_em_name][35]</li><li>[set_up_arm_1][base_em_name][36]</li><li>[set_up_arm_1][base_em_name][37]</li><li>[set_up_arm_1][base_em_name][38]</li><li>[set_up_arm_1][base_em_name][39]</li><li>[set_up_arm_1][base_em_name][40]</li></ol></td></tr></table>",,,,,,,,,,,,,
+notifications_readme,notifications_and_reporting,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/index.php"" target=""_blank"" style=""color:#FFF;"">Notifications and Reporting</a>
+
+If there are any important notifications to show to REDCap administrators, they will appear here on this page.
+</p>",,,,,,,,,,,,,
+notifications_displays,notifications_and_reporting,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+notifications_notes,notifications_and_reporting,,notes,Notes,,,,,,,,,LV,,,,
+system_stats_readme,system_statistics,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/system_stats.php"" target=""_blank"" style=""color:#FFF;"">System Statistics</a></p>",,,,,,,,,,,,,
+system_stats_displays,system_statistics,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+system_stats_notes,system_statistics,,notes,Notes,,,,,,,,,LV,,,,
+system_activity_readme,system_activity_log,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/todays_activity.php"" target=""_blank"" style=""color:#FFF;"">Activity Log</a></p>",,,,,,,,,,,,,
+system_activity_displays,system_activity_log,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+system_activity_notes,system_activity_log,,notes,Notes,,,,,,,,,LV,,,,
+system_graphs_readme,system_graphs,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/graphs.php"" target=""_blank"" style=""color:#FFF;"">System Graphs</a></p>",,,,,,,,,,,,,
+system_graphs_displays,system_graphs,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+system_graphs_notes,system_graphs,,notes,Notes,,,,,,,,,LV,,,,
+system_map_readme,map_of_users,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/google_map_user.php"" target=""_blank"" style=""color:#FFF;"">Map of Users</a></p>",,,,,,,,,,,,,
+system_map_displays,map_of_users,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+system_map_notes,map_of_users,,notes,Notes,,,,,,,,,LV,,,,
+browse_projects_readme,browse_projects,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/view_projects.php"" target=""_blank"" style=""color:#FFF;"">Browse Projects</a></p>",,,,,,,,,,,,,
+browse_projects_displays,browse_projects,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+browse_projects_name,browse_projects,,radio,"Search for a key word in this project's name.
+
+Did this project's name come up?","1, Yes | 0, No",,,,,,,,RH,,,,
+browse_projects_notes,browse_projects,,notes,Notes,,,,,,,,,LV,,,,
+project_settings_readme,projects_settings,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/edit_project.php?project=[set_up_arm_1][instance_pid]"" target=""_blank"" style=""color:#FFF;"">Edit Project Settings</a></p>",,,,,,,,,,,,,
+project_settings_displays,projects_settings,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+project_settings_modify,projects_settings,,radio,"Modify a setting: Did it save correctly?
+Suggested setting to modify. Custom text to display at top of Project Home page in project","1, Yes | 0, No",,,,,,,,RH,,,,
+project_settings_notes,projects_settings,,notes,Notes,,,,,,,,,LV,,,,
+survey_link_lookup_readme,survey_link_look_up,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/survey_link_lookup.php"" target=""_blank"" style=""color:#FFF;"">Survey Link Lookup</a></p>",,,,,,,,,,,,,
+survey_link_lookup_display,survey_link_look_up,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+survey_link_lookup_notes,survey_link_look_up,,notes,Notes,,,,,,,,,LV,,,,
+browse_users_readme,browse_users,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/view_users.php"" target=""_blank"" style=""color:#FFF;"">Browse Users</a></p>",,,,,,,,,,,,,
+browse_users_display,browse_users,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+browse_users_you_display,browse_users,,radio,"Search for your username, first name, last name or primary email.
+Do you come up?","1, Yes | 0, No",,,,,,,,RH,,,,
+view_users_display,browse_users,,radio,"Click on the tab ""View User List by Criteria"" 
+Does the page display correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+browse_users_notes,browse_users,,notes,Notes,,,,,,,,,LV,,,,
+user_allow_list_readme,user_allow_list,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/user_allowlist.php"" target=""_blank"" style=""color:#FFF;"">User Allow List</a>
+
+<em>Because this affects user authentication, it is recommended that these settings are not changed.</em>
+
+<em>When enabling the user allowlist, you have two different options. You have the option of 1) adding to the allowlist all existing REDCap users (using external authentication only), or 2) leaving the allowlist as is without adding any existing users (although all Administrators will still be added automatically).</em>
+</p>",,,,,,,,,,,,,
+user_allow_list_display,user_allow_list,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+user_allow_list_enabled,user_allow_list,,radio,"Is the User Allow list enabled?","1, Yes, It is enabled | 0, No, It is disabled",,,,,,,,,,,,
+user_allow_list_notes,user_allow_list,,notes,Notes,,,,,,,,,LV,,,,
+email_users_readme,email_users,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/email_users.php"" target=""_blank"" style=""color:#FFF;"">Email Users</a></p>",,,,,,,,,,,,,
+email_users_display,email_users,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+email_users_test,email_users,,radio,"Click on ""Send test email"".
+Did a pop up display that the test email was sent?","1, Yes | 0, No",,,,,,,,RH,,,,
+email_users_test_received,email_users,,radio,"Was the email received?","1, Yes | 0, No",,,,,,,,RH,,,,
+email_users_notes,email_users,,notes,Notes,,,,,,,,,LV,,,,
+api_tokens_readme,api_tokens,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/user_api_tokens.php"" target=""_blank"" style=""color:#FFF;"">API Tokens</a></p>",,,,,,,,,,,,,
+api_tokens_display,api_tokens,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+api_tokens_user_correct,api_tokens,,radio,"Choose anyone from the ""Manage API tokens by User:""
+Is the API token information correct?","1, Yes | 0, No",,,,,,,,RH,,,,
+api_tokens_notes,api_tokens,,notes,Notes,,,,,,,,,LV,,,,
+banned_ip_readme,banned_ip_addresses,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/banned_ips.php"" target=""_blank"" style=""color:#FFF;"">Banned IP Addresses</a></p>",,,,,,,,,,,,,
+banned_ip_display,banned_ip_addresses,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+banned_ip_notes,banned_ip_addresses,,notes,Notes,,,,,,,,,LV,,,,
+admin_privileges_readme,admin_privileges,,descriptive,"<p style=""background-color:#337ab7; padding:20px; border: 3px solid #22527b; color:#FFFFFF; border-radius: 5px;"">Directions: Visit <a href=""[set_up_arm_1][instance_version_url]ControlCenter/superusers.php"" target=""_blank"" style=""color:#FFF;"">Set REDCap Administrator Privileges</a></p>",,,,,,,,,,,,,
+admin_privileges_display,admin_privileges,,radio,"Page displays correctly","1, Yes | 0, No",,,,,,,,RH,,,,
+admin_privileges_notes,admin_privileges,,notes,Notes,,,,,,,,,LV,,,,
+lsp_always_show,longitudinal_skip_patterns,"Sometimes these are shown, sometimes not.  It is based on the values of other variables in other events. ",text,"Always show this field",,,,,,,,,,,,,
+lsp_sometimes_show,longitudinal_skip_patterns,,text,"Sometimes show",,,,,,,,,,,,,
+pse_textbox,piping_single_event,"Calculated fields can be piped.  However the piped value must be a number.  Calculated fields always result in a number, not dates, times, or strings. 
+
+To pass dates, times, or strings the piped value must go into the variable label. ",text,"Simple Text Box",,,,,,,,,,,,,
+pse_single_answer,piping_single_event,"The text above is: <h3>[pse_textbox]</h3>
+
+Piping with a misspelled pipe: [pse-textbox].  Note the lack of error message!  It is a visual thing only. ",dropdown,"Do you have hands (Multiple Choice, single answer)","0, No | 1, Yes | 2, Maybe | 3, Right Only | 4, Left Only | -1, NA",,autocomplete,,,,,,,,,,
+pse_pipe_comment,piping_single_event,,text,"Tell us about your <h3>[pse_single_answer]</h3>",,,,,,,,,,,,,
+pse_multiple_answers,piping_single_event,,checkbox,"Multiple answers","1, Right Handed | 2, Left Handed | 3, Ambidextrous | 4, Handed Challenged | 5, NA",,,,,,,,,,,,
+pse_like_demo,piping_single_event,"Result from question below: <h3>[pse_like_demo]</h3>",yesno,"Did you like this piping demo?",,,,,,,,,,,,,
+pse_calc_like_demo,piping_single_event,,calc,"This is a calculated field based on the answer for Did you like this piping demo.  Adding 10 to the answer","[pse_like_demo] + 10","Like Demo value + 10",,,,,,,,,,,
+pse_other_form_open_text,piping_single_event,,text,"Value from another form: <h3>[baseline_arm_1][open_text]</h3>
+
+This label changes based on the baseline calculated fields form!
+
+Because the project is longitudinal the ""Event"" must be included in square brackets Example: [Event_Name_arm_1]
+
+",,,,,,,,,,,,,
+regex_ssn,validations_custom_regex_examples,,descriptive,"Social Security Number (U.S.), Included in REDCap
+
+INSERT INTO `redcap_validation_types` (`validation_name`,`validation_label`,`regex_js`,`regex_php`,`data_type`,`legacy_value`,`visible`) 
+VALUES ('ssn','Social Security Number (U.S.)','/^\\d{3}-\\d\\d-\\d{4}$/','/^\\d{3}-\\d\\d-\\d{4}$/','ssn',NULL,1);
+",,,,,,,,,,,,,
+regex_orcid_id,validations_custom_regex_examples,,descriptive,"ORCID ID
+
+INSERT INTO `redcap_validation_types` (`validation_name`,`validation_label`,`regex_js`,`regex_php`,`data_type`,`legacy_value`,`visible`)
+VALUES ('orcid','ORCID ID','/^\\d{4}-\\d{4}-\\d{4}-\\d{3}(\\d|X)$/','/^\\d{4}-\\d{4}-\\d{4}-\\d{3}(\\d|X)$/','text',NULL,1);",,,,,,,,,,,,,
+a,variable_names,,text,a,,,,,,,,,,,,,
+a1,variable_names,,text,a1,,,,,,,,,,,,,
+a_1,variable_names,,text,a_1,,,,,,,,,,,,,
+not_ok_names,variable_names,,text,"Not allowed:
+
+Names that start with numbers
+dashes, @, or other symbols
+
+spaces in a name will be converted to underscores.
+
+Capitols will become lower case.
+
+Any variable name on any other instrument.",,,,,,,,,,,,,
+charset1,characters_that_are_not_in_the_character_set,,radio,"This is boring text","1, Nothing to see here. | 2, No odd characters. | 3, Keep moving along",,,,,,,,,,,,
+charset_spanish,characters_that_are_not_in_the_character_set,,radio,"Weird ᠽ ' + a; 頽 ' + e; � ' + i; 󠽠' + o;  = ' + u; 񠽠~ + n;  = "" + u ;  = Alt","1, ᠽ ' + a; 頽 ' + e; � ' + i; 󠽠' + o;  = ' + u; 񠽠~ + n;  = "" + u ;  = Alt | 2, ᠽ ' + a; 頽 ' + e; � ' + i; 󠽠' + o;  = ' + u; 񠽠~ + n;  = "" + u ;  = Alt | 3,",,,,,,,,,,,,
+asdfasdfasdfasdf,sandbox,,text,"what does this do?",,,number_1dp,-20,20,,,,,,,,
+duration,sandbox,,text,"Duration in minutes",,,number,0,600,,,,,,,," @HIDEBUTTON"
+delete_this,sandbox,,text,"New text box.... delete later. ",,,datetime_dmy,"2017-01-01 00:12",,,,,,,,,
+true_false,sandbox,,radio,"True False","1, Yes | 2, No",,,,,,,,,,,,
+public_data,public_report,,text,"Data in this field will available to the public.",,,,,,,,,,,,,
+un_error_describe,unexcepted_error,,notes,"Brief Description of the unexpected error. ",,,,,,,,,LH,,,," @DEFAULT=""Observed Behavior:<br>Expected Behavior:"""
+un_error_reproduce,unexcepted_error,,radio,"Is it reproducible?","1, Yes | 0, No",,,,,,,,RH,,,,
+un_error_steps,unexcepted_error,,notes,"Steps to reproduce",,,,,,,,,LH,,,," @DEFAULT=""Starting Page<br>Step 1:<br>Step 2:<br>Step 3:<br>Step 4:<br>Step 5:<br>Step 6:<br>Step 7:<br>Step 8:<br>Step 9:"""
+un_error_addressed,unexcepted_error,,radio,"Has it been addressed?","1, Yes | 0, No",,,,,,,,RH,,,,
+un_error_critical,unexcepted_error,,radio,"Is it critical to the function of REDCap","1, Yes | 0, No",,,,,,,,RH,,,,
